@@ -3,7 +3,6 @@
 # The MongoDB Homebrew Tap
 
 This is a custom [Homebrew](https://brew.sh) tap for official MongoDB software.
-Please note that this is currently exprimental as we test and develop the tap further.
 
 
 ## Setup
