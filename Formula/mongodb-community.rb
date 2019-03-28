@@ -19,8 +19,8 @@ class MongodbCommunity < Formula
     a['archive']
   }[0]
 
-  url latest_mac["url"]
-  sha256 latest_mac["sha256"]
+  url latest_mac['url']
+  sha256 latest_mac['sha256']
 
   bottle :unneeded
 

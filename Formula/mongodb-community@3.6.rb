@@ -1,8 +1,25 @@
 class MongodbCommunityAT36 < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
-  url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.6.10.tgz"
-  sha256 "92dfc3b4571ad7c3855adff9fc878044296fcf69c2f8a1d5de554c0df588db88"
+
+  # frozen_string_literal: true
+
+  require 'net/http'
+  require 'json'
+  current = JSON.parse(Net::HTTP.get(URI('http://downloads.mongodb.org/current.json')))
+  latest = current['versions'].select { |r|
+    r['production_release'] == true \
+    && r['version'] =~ /^3\.6\.[0-9]+$/
+  }[0]
+  latest_mac = latest['downloads'].select { |m|
+    (m['target'] == 'osx-ssl' || m['target'] == 'macos') \
+    && m['edition'] == 'base'
+  } .map { |a|
+    a['archive']
+  }[0]
+
+  url latest_mac['url']
+  sha256 latest_mac['sha256']
 
   bottle :unneeded
 
