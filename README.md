@@ -4,21 +4,79 @@
 
 This is a custom [Homebrew](https://brew.sh) tap for official MongoDB software.
 
-
 ## Setup
-You can add the custom tap on your mac using: `$ brew tap mongodb/brew`
 
+You can add the custom tap in a MacOS terminal session using:
 
-## Installing Forumlae 
-Once the tap has been added locally, you can install individual software packages with: 
-`$ brew install <formula>`
+```
+$ brew tap mongodb/brew
+```
+
+## Installing Formulae
+
+Once the tap has been added locally, you can install individual software packages with:
+
+```
+$ brew install <formula>
+```
 
 For example:
-* Install the latest community version of MongoDB Server: `$ brew install mongodb-community`
-* Install the latest community version of MongoDB Server 3.6 `$ brew install mongodb-community@3.6`
-* Install the latest community shell for connecting to remote MongoDB instances: `$ brew install mongodb-community-shell`
 
+ * Install the latest production release of MongoDB Community Server ([including all command line tools](https://docs.mongodb.com/manual/reference/program/))
+   ```
+   $ brew install mongodb-community
+   ```
+
+ * Install the latest 3.6.x production release of MongoDB Community Server ([including all command line tools](https://docs.mongodb.com/manual/reference/program/))
+   ```
+   $ brew install mongodb-community@3.6
+   ```
+
+ * Only install the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances
+   ```
+   $ brew install mongodb-community-shell
+   ```
+
+## Default paths for the mongodb-community formula
+
+In addition to installing the MongoDB server and tool binaries, the `mongodb-community` formula creates:
+
+ * a configuration file: `/usr/local/etc/mongod.conf`
+ * a log directory path: `/usr/local/var/log/mongodb`
+ * a data directory path: `/usr/local/var/mongodb`
+
+## Starting mongodb-community server
+
+### Run `mongod` as a service
+
+To have `launchd` start `mongod` immediately and also restart at login, use:
+
+```
+$ brew services start mongodb-community
+```
+If you manage `mongod` as a service it will use the default paths listed above. To stop the server instance use:
+
+```
+$ brew services stop mongodb-community
+```
+
+### Start `mongod` manually
+
+If you don't want or need a background MongoDB service you can run:
+
+```
+$ mongod --config /usr/local/etc/mongod.conf
+```
+Note: if you do not include the `--config` option with a path to a configuration file, the MongoDB server does not have a default configuration file or log directory path and will use a data directory path of `/data/db`.
+
+To shutdown `mongod` started manually, use the `admin` database and run `db.shutdownServer()`:
+
+```
+$ mongo admin --eval "db.shutdownServer()"
+```
 
 ## Additional Information
-This tap was created using the documentation [here](https://github.com/Homebrew/brew/blob/master/docs/How-to-Create-and-Maintain-a-Tap.md).
-You can find additional information on Homebrew in [the project README](https://github.com/Homebrew/brew#homebrew).
+
+This tap was created using the Homebrew documentation on [How to Create and Maintain a tap](https://github.com/Homebrew/brew/blob/master/docs/How-to-Create-and-Maintain-a-Tap.md).
+
+You can find additional information in the [Homebrew project README](https://github.com/Homebrew/brew#homebrew).
