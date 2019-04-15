@@ -37,7 +37,7 @@ For example:
    $ brew install mongodb-community-shell
    ```
 
-## Default paths for the mongodb-community formula
+## Default Paths for the mongodb-community Formula
 
 In addition to installing the MongoDB server and tool binaries, the `mongodb-community` formula creates:
 
@@ -45,7 +45,7 @@ In addition to installing the MongoDB server and tool binaries, the `mongodb-com
  * a log directory path: `/usr/local/var/log/mongodb`
  * a data directory path: `/usr/local/var/mongodb`
 
-## Starting mongodb-community server
+## Starting the mongodb-community Server
 
 ### Run `mongod` as a service
 
