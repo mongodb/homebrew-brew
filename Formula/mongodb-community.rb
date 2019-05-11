@@ -6,6 +6,7 @@ class MongodbCommunity < Formula
 
   require 'net/http'
   require 'json'
+  require 'rubygems'
   current = JSON.parse(Net::HTTP.get(URI('http://downloads.mongodb.org/current.json')))
   latest_ga = current['versions'].select { |r|
     r['production_release'] == true
