@@ -6,7 +6,7 @@ class MongodbCommunityAT32 < Formula
 
   require 'net/http'
   require 'json'
-  current = JSON.parse(Net::HTTP.get(URI('http://downloads.mongodb.org/current.json')))
+  current = JSON.parse(Net::HTTP.get(URI('https://downloads.mongodb.org/current.json')))
   latest = current['versions'].select { |r|
     r['production_release'] == true \
     && r['version'] =~ /^3\.2\.[0-9]+$/

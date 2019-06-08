@@ -6,7 +6,7 @@ class MongodbCommunityShell < Formula
 
   require 'net/http'
   require 'json'
-  current = JSON.parse(Net::HTTP.get(URI('http://downloads.mongodb.org/current.json')))
+  current = JSON.parse(Net::HTTP.get(URI('https://downloads.mongodb.org/current.json')))
   latest_ga = current['versions'].select { |r|
     r['production_release'] == true
   } .max_by { |v|
