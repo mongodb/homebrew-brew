@@ -1,27 +1,11 @@
 class MongodbCommunity < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
-
+  
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.2.0.tgz"
+  sha256 "c7214ee7bda3cf9566e8776a8978706d9827c1b09017e17b66a5a4e0c0731e1f"
+  
   # frozen_string_literal: true
-
-  require 'net/http'
-  require 'json'
-  require 'rubygems'
-  current = JSON.parse(Net::HTTP.get(URI('https://downloads.mongodb.org/current.json')))
-  latest_ga = current['versions'].select { |r|
-    r['production_release'] == true
-  } .max_by { |v|
-    Gem::Version.new(v['version'])
-  }
-  latest_mac = latest_ga['downloads'].select { |m|
-    (m['target'] == 'osx-ssl' || m['target'] == 'macos') \
-    && m['edition'] == 'base'
-  } .map { |a|
-    a['archive']
-  }[0]
-
-  url latest_mac['url']
-  sha256 latest_mac['sha256']
 
   bottle :unneeded
 

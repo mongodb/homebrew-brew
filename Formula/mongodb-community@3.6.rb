@@ -4,22 +4,8 @@ class MongodbCommunityAT36 < Formula
 
   # frozen_string_literal: true
 
-  require 'net/http'
-  require 'json'
-  current = JSON.parse(Net::HTTP.get(URI('https://downloads.mongodb.org/current.json')))
-  latest = current['versions'].select { |r|
-    r['production_release'] == true \
-    && r['version'] =~ /^3\.6\.[0-9]+$/
-  }[0]
-  latest_mac = latest['downloads'].select { |m|
-    (m['target'] == 'osx-ssl' || m['target'] == 'macos') \
-    && m['edition'] == 'base'
-  } .map { |a|
-    a['archive']
-  }[0]
-
-  url latest_mac['url']
-  sha256 latest_mac['sha256']
+  url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.6.14.tgz"
+  sha256 "47dbcd5cc5889b6c118f9b60089d0472a4e9d86d4f567c05898f2126280b1c61"
 
   bottle :unneeded
 
