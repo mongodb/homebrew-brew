@@ -3,7 +3,7 @@ class MongodbCommunity < Formula
   homepage "https://www.mongodb.com/"
   
   url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.2.0.tgz"
-  sha256 "c7214ee7bda3cf9566e8776a8978706d9827c1b09017e17b66a5a4e0c0731e1f"
+  sha256 "6aa2e0c348e8abeec7931dced1f85d4bb161ef209c6af317fe530ea11bbac8f0"
   
   # frozen_string_literal: true
 
