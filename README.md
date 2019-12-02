@@ -85,8 +85,12 @@ To shutdown `mongod` started manually, use the `admin` database and run `db.shut
 $ mongo admin --eval "db.shutdownServer()"
 ```
 
-## Additional Information
+## Additional Information and Problem Reporting
 
 This tap was created using the Homebrew documentation on [How to Create and Maintain a tap](https://github.com/Homebrew/brew/blob/master/docs/How-to-Create-and-Maintain-a-Tap.md).
 
 You can find additional information in the [Homebrew project README](https://github.com/Homebrew/brew#homebrew).
+
+If you're having issues with MongoDB please check out [our community support resources](https://www.mongodb.com/community-support-resources).
+
+If you've found a bug please [open a JIRA ticket in the SERVER project](https://jira.mongodb.org).
