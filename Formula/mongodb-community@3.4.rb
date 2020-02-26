@@ -63,12 +63,12 @@ class MongodbCommunityAT34 < Formula
       <key>HardResourceLimits</key>
       <dict>
         <key>NumberOfFiles</key>
-        <integer>4096</integer>
+        <integer>64000</integer>
       </dict>
       <key>SoftResourceLimits</key>
       <dict>
         <key>NumberOfFiles</key>
-        <integer>4096</integer>
+        <integer>64000</integer>
       </dict>
     </dict>
     </plist>
