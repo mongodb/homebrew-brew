@@ -2,8 +2,8 @@ class MongodbCommunity < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.2.5.tgz"
-  sha256 "f6436b5c981618fd54ccbc4c07ec64d3c64de680c61b4af99c3f55235fb4a3e0"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.2.6.tgz"
+  sha256 "701fda6ab0b49121913204596d527d89d4a533a3a7d1ca2f245c7908e1342c5b"
 
   # frozen_string_literal: true
 
