@@ -7,7 +7,7 @@ class Mongocli < Formula
 
   if OS.mac?
     url "https://github.com/mongodb/mongocli/releases/download/v1.0.0-rc1/mongocli_1.0.0-rc1_macos_x86_64.zip"
-    sha256 "f519fcd1b70cd49a2180365b8fdd558e119fcd636291eca19ebe9c6f0b26b927"
+    sha256 "f253c7c1fa55a1a923744868de7aba6a654f4c4483151cd6673738adaeb62511"
   elsif OS.linux?
   end
 
