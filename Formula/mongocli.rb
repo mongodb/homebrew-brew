@@ -7,11 +7,11 @@ class Mongocli < Formula
 
   if OS.mac?
     url "https://github.com/mongodb/mongocli/releases/download/v1.0.0-rc2/mongocli_1.0.0-rc2_macos_x86_64.zip"
-    sha256 "39964d951aa1e4b33eb9dab8cd1de58a584ec8098c5216dfc1ffc01d9cb055c5"
+    sha256 "bcd6b268e179315ce35326a11af518f9d52f512e864b2f0002f56dcc8f6548b5"
   elsif OS.linux?
     if Hardware::CPU.intel?
       url "https://github.com/mongodb/mongocli/releases/download/v1.0.0-rc2/mongocli_1.0.0-rc2_linux_x86_64.tar.gz"
-      sha256 "6b455b565a122c0c4f3942ba974eb6909820355a781384caec7a317d7e0a3a65"
+      sha256 "69ea8061491ef2bd22e86bf56e157b0800bfcafa1f2120b8afe422cb018bac7e"
     end
   end
 
