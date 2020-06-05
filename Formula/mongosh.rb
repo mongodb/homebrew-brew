@@ -5,7 +5,10 @@ class Mongosh < Formula
   homepage "https://github.com/mongodb-js/mongosh#readme"
   url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.0.5.tgz"
   version "0.0.5"
-  sha256 "70aab0f585cb4fc0c1e2c26bbe19d36d2d68022fe2cca85fe8099196a9cd7606"
+
+  # This is the checksum of the url. Can be obtained with:
+  # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.0.5.tgz | shasum -a 256
+  sha256 "aa3d6426943b999a5b6002cb11ddae48b355ee73040bd2a7bb4da25729362b66"
 
   depends_on "node"
 
