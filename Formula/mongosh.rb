@@ -6,7 +6,7 @@ class Mongosh < Formula
   url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.0.5.tgz"
   version "0.0.5"
 
-  # This is the checksum of the url. Can be obtained with:
+  # This is the checksum of the archive. Can be obtained with:
   # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.0.5.tgz | shasum -a 256
   sha256 "aa3d6426943b999a5b6002cb11ddae48b355ee73040bd2a7bb4da25729362b66"
 
