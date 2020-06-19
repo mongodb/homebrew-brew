@@ -10,7 +10,7 @@ class Mongosh < Formula
   # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.0.6.tgz | shasum -a 256
   sha256 "23bb944fc189778f72c7276806abe69a61e711b938d53645cfe8dd2668178313"
 
-  depends_on "node"
+  depends_on "node@12"
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
