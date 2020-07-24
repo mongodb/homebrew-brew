@@ -4,8 +4,8 @@ class MongodbCommunityAT36 < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.6.18.tgz"
-  sha256 "f7921cc53bf20966c420cc0dbb9e5a3bfe20519f87863cdc2583142cbc20b5b1"
+  url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.6.19.tgz"
+  sha256 "c569ddec94d53046699c671ac509f13064a99f1dc180d52b54d0e30325df200c"
 
   bottle :unneeded
 
