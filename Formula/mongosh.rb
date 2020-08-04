@@ -4,7 +4,7 @@ class Mongosh < Formula
   desc "The MongoDB Shell"
   homepage "https://github.com/mongodb-js/mongosh#readme"
   url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.1.0.tgz"
-  version "0.0.8"
+  version "0.1.0"
 
   # This is the checksum of the archive. Can be obtained with:
   # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.1.0.tgz | shasum -a 256
