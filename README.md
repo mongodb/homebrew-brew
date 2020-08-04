@@ -22,27 +22,27 @@ $ brew install <formula>
 
 For example:
 
- * Install the latest available production release of MongoDB Community Server (including the [Database Tools](https://docs.mongodb.com/database-tools/)). This will currently install MongoDB 4.4.x:
+ * Install the latest available production release of MongoDB Community Server. This will currently install MongoDB 4.4.x:
    ```
    $ brew install mongodb-community
    ```
 
- * Install the latest 4.4.x production release of MongoDB Community Server and the Database Tools:
+ * Install the latest 4.4.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.4
    ```
 
-* Install the latest 4.2.x production release of MongoDB Community Server and the Database Tools:
+* Install the latest 4.2.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.2
    ```
 
- * Install the latest 4.0.x production release of MongoDB Community Server and the Database Tools:
+ * Install the latest 4.0.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.0
    ```
 
- * Install the latest 3.6.x production release of MongoDB Community Server and the Database Tools:
+ * Install the latest 3.6.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@3.6
    ```
@@ -52,7 +52,7 @@ For example:
    $ brew install mongodb-community-shell
    ```
 
- * Only install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/):
+ * Install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/):
    ```
    $ brew install mongodb-database-tools
    ```
