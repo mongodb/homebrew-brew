@@ -32,7 +32,7 @@ Use the commands in this section to install the latest version of the MongoDB Se
    $ brew install mongodb-community-shell
    ```
 
- * Install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools (`mongoimport`, `mongoexport`, `mongodump`, etc) for working with a MongoDB Server instance. Starting with the MongoDB 4.4 Server release, the Database Tools are now [pacakged, versioned, and released independently](https://www.mongodb.com/blog/post/separating-database-tools-server) from the MongoDB Server package. The MongoDB Database Tools release with an initial version of `100.0.0`. Previously, the Database Tools were bundled with the MongoDB Server installation nad used matching versioning.
+ * Install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools (`mongoimport`, `mongoexport`, `mongodump`, etc) for working with a MongoDB Server instance. Starting with the MongoDB 4.4 Server release, the Database Tools are now [pacakged, versioned, and released independently](https://www.mongodb.com/blog/post/separating-database-tools-server) from the MongoDB Server package. The MongoDB Database Tools released with an initial version of `100.0.0`. Previously, the Database Tools were bundled with the MongoDB Server installation nad used matching versioning.
 
    ```
    $ brew install mongodb-database-tools
