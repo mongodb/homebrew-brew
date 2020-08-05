@@ -14,18 +14,33 @@ $ brew tap mongodb/brew
 
 ## Installing Formulae
 
-Once the tap has been added locally, you can install individual software packages with:
+Once the tap has been added, use the instructions below to install the software packages you need. You can choose to install either the latest version of the MongoDB Server (recommended), or a specific version if desired.
 
-```
-$ brew install <formula>
-```
+### Installing the Latest MongoDB Server, Shell, or Database Tools
 
-For example:
+Use the commands in this section to install the latest version of the MongoDB Server, the shell, or the MongoDB Database Tools.
 
- * Install the latest available production release of MongoDB Community Server. This will currently install MongoDB 4.4.x:
+ * Install the latest available production release of [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, and `install_compass` to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 4.4.x:
+ 
    ```
    $ brew install mongodb-community
    ```
+
+ * Install only the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongo` shell separately:
+
+   ```
+   $ brew install mongodb-community-shell
+   ```
+
+ * Install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools for working with a MongoDB Server instance. Starting with the MongoDB 4.4 Server release, the Database Tools are now [pacakged, versioned, and released independently](https://www.mongodb.com/blog/post/separating-database-tools-server) from the MongoDB Server package. The MongoDB Database Tools release with an initial version of `100.0.0`. Previously, the Database Tools were bundled with the MongoDB Server installation nad used matching versioning. Use this command to install the MongoDB Database Tools:
+
+   ```
+   $ brew install mongodb-database-tools
+   ```
+
+### Installing a Specific Version of the MongoDB Server
+
+Alternatively, you can install a specific version of the MongoDB Server if desired.
 
  * Install the latest 4.4.x production release of MongoDB Community Server:
    ```
@@ -45,16 +60,6 @@ For example:
  * Install the latest 3.6.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@3.6
-   ```
-
- * Only install the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances:
-   ```
-   $ brew install mongodb-community-shell
-   ```
-
- * Install the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/):
-   ```
-   $ brew install mongodb-database-tools
    ```
 
 ## Default Paths for the mongodb-community Formula
@@ -94,6 +99,14 @@ To shutdown `mongod` started manually, use the `admin` database and run `db.shut
 ```
 $ mongo admin --eval "db.shutdownServer()"
 ```
+
+## The Documentation
+
+For more information, please reference the following documentation:
+
+* [The MongoDB Server Manual](https://docs.mongodb.com/manual/)
+
+* [The MongoDB Database Tools Documentation](https://docs.mongodb.com/database-tools/)
 
 ## Additional Information and Problem Reporting
 
