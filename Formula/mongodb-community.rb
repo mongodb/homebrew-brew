@@ -9,6 +9,8 @@ class MongodbCommunity < Formula
 
   bottle :unneeded
 
+  depends_on "mongodb-database-tools" => :recommended
+
   def install
     prefix.install Dir["*"]
   end
