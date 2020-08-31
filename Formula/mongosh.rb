@@ -8,7 +8,7 @@ class Mongosh < Formula
 
   # This is the checksum of the archive. Can be obtained with:
   # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.2.tgz | shasum -a 256
-  sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  sha256 "03f844e6fbfcf5860c0d1303bc7926a243eafc923112b5657995ff156bc33cb4"
 
   depends_on "node@12"
 
