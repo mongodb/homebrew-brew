@@ -3,12 +3,12 @@ require "language/node"
 class Mongosh < Formula
   desc "The MongoDB Shell"
   homepage "https://github.com/mongodb-js/mongosh#readme"
-  url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.1.tgz"
-  version "0.2.1"
+  url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.2.tgz"
+  version "0.2.2"
 
   # This is the checksum of the archive. Can be obtained with:
-  # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.1.tgz | shasum -a 256
-  sha256 "ea812802e45fecc5f7d56fe77ef0220b2d6738d26f95ca3ae97dac93f80d150b"
+  # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.2.tgz | shasum -a 256
+  sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
   depends_on "node@12"
 
