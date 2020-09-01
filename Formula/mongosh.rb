@@ -2,6 +2,7 @@ require "language/node"
 
 class Mongosh < Formula
   desc "The MongoDB Shell"
+
   homepage "https://github.com/mongodb-js/mongosh#readme"
   url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.2.2.tgz"
   version "0.2.2"
