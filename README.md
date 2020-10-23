@@ -14,42 +14,52 @@ $ brew tap mongodb/brew
 
 ## Installing Formulae
 
-Once the tap has been added locally, you can install individual software packages with:
+Once the tap has been added, use the instructions below to install the software packages you need. You can choose to install either the latest version of the MongoDB Server (recommended), or a specific version if desired.
 
-```
-$ brew install <formula>
-```
+### Installing the Latest mongodb-community Server, Shell, and the Database Tools Together
 
-For example:
-
- * Install the latest available production release of MongoDB Community Server ([including all command line tools](https://docs.mongodb.com/manual/reference/program/)). This will currently install MongoDB 4.4.x:
+ * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 4.4.x.
+ 
    ```
    $ brew install mongodb-community
    ```
 
- * Install the latest 4.e.x production release of MongoDB Community Server and command line tools:
+### Installing only the Shell or the Database Tools
+
+ * Install only the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongo` shell separately.
+
+   ```
+   $ brew install mongodb-community-shell
+   ```
+
+ * Install only the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools (`mongoimport`, `mongoexport`, `mongodump`, etc) for working with a MongoDB Server instance. If you installed the MongoDB Server in the step above, the Database Tools were included in that installation. Use this command only if you need to install the Database Tools separately.
+
+   ```
+   $ brew install mongodb-database-tools
+   ```
+
+### Installing a Specific Version of the mongodb-community Server
+
+Alternatively, you can install a specific version of the MongoDB Server if desired.
+
+ * Install the latest 4.4.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.4
    ```
 
-* Install the latest 4.2.x production release of MongoDB Community Server and command line tools:
+* Install the latest 4.2.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.2
    ```
 
- * Install the latest 4.0.x production release of MongoDB Community Server and command line tools:
+ * Install the latest 4.0.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@4.0
    ```
 
- * Install the latest 3.6.x production release of MongoDB Community Server and command line tools:
+ * Install the latest 3.6.x production release of MongoDB Community Server:
    ```
    $ brew install mongodb-community@3.6
-   ```
-
- * Only install the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances:
-   ```
-   $ brew install mongodb-community-shell
    ```
 
 ## Default Paths for the mongodb-community Formula
@@ -89,6 +99,28 @@ To shutdown `mongod` started manually, use the `admin` database and run `db.shut
 ```
 $ mongo admin --eval "db.shutdownServer()"
 ```
+
+## Uninstalling the mongodb-community Server
+
+If you need to uninstall the MongoDB Server, use:
+
+```
+$ brew uninstall mongodb-community
+```
+
+Note that this does not uninstall the bundled Database Tools. To uninstall the Database Tools, additionally run the folowing:
+
+```
+$ brew uninstall mongodb-database-tools
+```
+
+## The Documentation
+
+For more information, please reference the following documentation:
+
+* [The MongoDB Server Manual](https://docs.mongodb.com/manual/)
+
+* [The MongoDB Database Tools Documentation](https://docs.mongodb.com/database-tools/)
 
 ## Additional Information and Problem Reporting
 
