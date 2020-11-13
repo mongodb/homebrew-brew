@@ -4,6 +4,7 @@ class Libmongocrypt < Formula
   url "https://github.com/mongodb/libmongocrypt/archive/1.0.4.tar.gz"
   sha256 "34244b473ceedd51f5885cd80ca3f818924fac4695b5cfcd5396092c726680d9"
   license "Apache-2.0"
+  head "https://github.com/mongodb/libmongocrypt.git"
 
   depends_on "cmake" => :build
   depends_on "mongo-c-driver" => :build
