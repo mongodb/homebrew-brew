@@ -4,7 +4,8 @@ class Mongocli < Formula
   homepage "https://github.com/mongodb/mongocli"
   version "1.9.0"
   bottle :unneeded
-
+  depends_on arch: :x86_64
+  
   if OS.mac?
     url "https://github.com/mongodb/mongocli/releases/download/v1.9.0/mongocli_1.9.0_macos_x86_64.zip"
     sha256 "fb8fea2222e5d058d066af84858ba4e483c2c6280878d295e594471382ebd09c"
