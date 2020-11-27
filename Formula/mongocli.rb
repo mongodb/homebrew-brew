@@ -2,17 +2,16 @@
 class Mongocli < Formula
   desc "The MongoDB Command Line Interface (mongocli) is a tool for managing your MongoDB cloud services, like MongoDB Atlas, MongoDB Cloud Manager, and MongoDB Ops Manager."
   homepage "https://github.com/mongodb/mongocli"
-  version "1.8.0"
+  version "1.9.0"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/mongodb/mongocli/releases/download/v1.8.0/mongocli_1.8.0_macos_x86_64.zip"
-    sha256 "84c330ebd0a30e8b289ff512caf96443ee7f3ac423b933c572c0017fb6938e0d"
-  elsif OS.linux?
-    if Hardware::CPU.intel?
-      url "https://github.com/mongodb/mongocli/releases/download/v1.8.0/mongocli_1.8.0_linux_x86_64.tar.gz"
-      sha256 "1974ecb80b1260345049ac0d516d831ce2026f75b13645a6f17e4e552049aa96"
-    end
+    url "https://github.com/mongodb/mongocli/releases/download/v1.9.0/mongocli_1.9.0_macos_x86_64.zip"
+    sha256 "fb8fea2222e5d058d066af84858ba4e483c2c6280878d295e594471382ebd09c"
+  end
+  if OS.linux? && Hardware::CPU.intel?
+    url "https://github.com/mongodb/mongocli/releases/download/v1.9.0/mongocli_1.9.0_linux_x86_64.tar.gz"
+    sha256 "bb745cd35cd96567e25db9eea6033512e67cc0a4e70fe54e88c73bc01cde4142"
   end
 
   def install
