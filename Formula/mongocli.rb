@@ -9,7 +9,7 @@ class Mongocli < Formula
   license "Apache-2.0"
   bottle :unneeded
 
-  if OS.mac? && Hardware::CPU.intel?
+  if OS.mac?
     url "https://github.com/mongodb/mongocli/releases/download/v1.14.0/mongocli_1.14.0_macos_x86_64.zip"
     sha256 "2fca7ae5bd8f00468910a2a472f8c3f88aaa65ca2df4ad546b83a8d840e38c8d"
   end
