@@ -5,25 +5,25 @@
 class Mongocli < Formula
   desc "The MongoDB Command Line Interface (mongocli) is a tool for managing your MongoDB cloud services, like MongoDB Atlas, MongoDB Cloud Manager, and MongoDB Ops Manager."
   homepage "https://github.com/mongodb/mongocli"
-  version "1.15.0"
+  version "1.15.1"
   license "Apache-2.0"
   bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/mongodb/mongocli/releases/download/v1.15.0/mongocli_1.15.0_macos_x86_64.zip"
-    sha256 "eaf9b345c6a8102b3f04a0584d6705f6171243f4b05cc52875e252e0a7d088ba"
+    url "https://github.com/mongodb/mongocli/releases/download/v1.15.1/mongocli_1.15.1_macos_x86_64.zip"
+    sha256 "69854f2e63fb1a12ef93be5cd2096ec2de9a0ac6318d68f4c46ec47a7cf359a9"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/mongodb/mongocli/releases/download/v1.15.0/mongocli_1.15.0_macos_arm64.zip"
-    sha256 "cc976c03a9206f88b2fc089f48077a1bd139b9b686077f6660b15ed49816744d"
+    url "https://github.com/mongodb/mongocli/releases/download/v1.15.1/mongocli_1.15.1_macos_arm64.zip"
+    sha256 "98bb56e35a2c3a581f5d5ec3a52b99910231163c2479d72b7f4d4de1eec7dac1"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/mongodb/mongocli/releases/download/v1.15.0/mongocli_1.15.0_linux_x86_64.tar.gz"
-    sha256 "e353505e4b9cdc1c95605d26a4ab6bfcce9e883e67553cfe65609f78f9c1158a"
+    url "https://github.com/mongodb/mongocli/releases/download/v1.15.1/mongocli_1.15.1_linux_x86_64.tar.gz"
+    sha256 "b73bd614b414c5974fd4372ed202ea8c77c5d6d808e0ee8b99893ce81cb229fc"
   end
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "https://github.com/mongodb/mongocli/releases/download/v1.15.0/mongocli_1.15.0_linux_arm64.tar.gz"
-    sha256 "0edb2c7d3eb473dd84052afe40de30c7a4f2544eb40b1175fef7763e34c9ffe6"
+    url "https://github.com/mongodb/mongocli/releases/download/v1.15.1/mongocli_1.15.1_linux_arm64.tar.gz"
+    sha256 "21b95be0fa22d3ca6bb97178db5b3c5d263228233b1d975a084c4571d7dd845c"
   end
 
   def install
