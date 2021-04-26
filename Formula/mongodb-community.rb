@@ -4,8 +4,8 @@ class MongodbCommunity < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.4.tgz"
-  sha256 "8ae47e4f2ac2687fc0f64e8a299ec1797a10b94d131321ea17f9e0722e2e6463"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.5.tgz"
+  sha256 "4b38fd50170bddccf14cc4688ca59a44346b85cdcbc77113fcfb904b8f8c0882"
 
   bottle :unneeded
 
