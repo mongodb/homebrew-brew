@@ -4,12 +4,12 @@ class Mongosh < Formula
   desc "The MongoDB Shell"
 
   homepage "https://github.com/mongodb-js/mongosh#readme"
-  url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.12.1.tgz"
-  version "0.12.1"
+  url "https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.13.1.tgz"
+  version "0.13.1"
 
   # This is the checksum of the archive. Can be obtained with:
-  # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.12.1.tgz | shasum -a 256
-  sha256 "6356a4672c0ee8340374ff3579566b100121044ca13af66358411cfe744cf2ff"
+  # curl -s https://registry.npmjs.org/@mongosh/cli-repl/-/cli-repl-0.13.1.tgz | shasum -a 256
+  sha256 "9065b59486c5264e17ae7782f177420fa71612a5d128bff74141d96c2d07e7df"
 
   depends_on "node@14"
 
