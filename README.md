@@ -18,8 +18,8 @@ Once the tap has been added, use the instructions below to install the software 
 
 ### Installing the Latest mongodb-community Server, Shell, and the Database Tools Together
 
- * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 4.4.x.
- 
+ * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 5.0.x.
+
    ```
    $ brew install mongodb-community
    ```
@@ -41,6 +41,11 @@ Once the tap has been added, use the instructions below to install the software 
 ### Installing a Specific Version of the mongodb-community Server
 
 Alternatively, you can install a specific version of the MongoDB Server if desired.
+
+ * Install the latest 5.0.x production release of MongoDB Community Server:
+   ```
+   $ brew install mongodb-community@5.0
+   ```
 
  * Install the latest 4.4.x production release of MongoDB Community Server:
    ```
