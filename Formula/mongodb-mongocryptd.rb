@@ -12,6 +12,10 @@ class MongodbMongocryptd < Formula
     EOS
   end
 
+  def install
+    prefix.install Dir["*"]
+  end
+
   test do
     system "#{bin}/mongocryptd", "--version"
   end

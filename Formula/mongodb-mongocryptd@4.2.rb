@@ -13,7 +13,7 @@ class MongodbMongocryptdAT42 < Formula
   end
 
   def install
-    bin.install "bin/mongocryptd"
+    prefix.install Dir["*"]
   end
 
   test do
