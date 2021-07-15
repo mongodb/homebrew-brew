@@ -1,16 +1,17 @@
-class MongodbCommunity < Formula
+class MongodbCommunityAT44 < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.0.tgz"
-  sha256 "3539cb8a51cca2ea41634a12c2b78a06cd97f84ef849fbaa05136388a8712b17"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.6.tgz"
+  sha256 "433ad7b7110ea51cb8805e35aea90eab5065e8192a4c2db6cc57c2ae5e08596d"
 
   bottle :unneeded
 
   depends_on "mongodb-database-tools" => :recommended
-  depends_on "mongosh" => :recommended
+
+  keg_only :versioned_formula
 
   def install
     prefix.install Dir["*"]
