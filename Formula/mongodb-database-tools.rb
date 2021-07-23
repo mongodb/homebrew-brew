@@ -4,8 +4,8 @@ class MongodbDatabaseTools < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.4.0.zip"
-  sha256 "ecb621e9b9dae0f031a7dfb6bf9aa5a417585c3754f0213263c5009adce870f6"
+  url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.4.1.zip"
+  sha256 "60d732fc87e0984a9cb1aed9e62699da473e7ffa3743a98fee63a2b132d49779"
 
   bottle :unneeded
 
