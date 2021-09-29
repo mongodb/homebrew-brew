@@ -8,8 +8,8 @@ This is a custom [Homebrew](https://brew.sh) tap for official MongoDB software.
 
 You can add the custom tap in a MacOS terminal session using:
 
-```
-$ brew tap mongodb/brew
+```bash
+brew tap mongodb/brew
 ```
 
 ## Installing Formulae
@@ -20,22 +20,22 @@ Once the tap has been added, use the instructions below to install the software 
 
  * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 5.0.x.
 
-   ```
-   $ brew install mongodb-community
+   ```bash
+   brew install mongodb-community
    ```
 
 ### Installing only the Shell or the Database Tools
 
  * Install only the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongo` shell separately.
 
-   ```
-   $ brew install mongodb-community-shell
+   ```bash
+   brew install mongodb-community-shell
    ```
 
  * Install only the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools (`mongoimport`, `mongoexport`, `mongodump`, etc) for working with a MongoDB Server instance. If you installed the MongoDB Server in the step above, the Database Tools were included in that installation. Use this command only if you need to install the Database Tools separately.
 
-   ```
-   $ brew install mongodb-database-tools
+   ```bash
+   brew install mongodb-database-tools
    ```
 
 ### Installing a Specific Version of the mongodb-community Server
@@ -43,28 +43,28 @@ Once the tap has been added, use the instructions below to install the software 
 Alternatively, you can install a specific version of the MongoDB Server if desired.
 
  * Install the latest 5.0.x production release of MongoDB Community Server:
-   ```
-   $ brew install mongodb-community@5.0
+   ```bash
+   brew install mongodb-community@5.0
    ```
 
  * Install the latest 4.4.x production release of MongoDB Community Server:
-   ```
-   $ brew install mongodb-community@4.4
+   ```bash
+   brew install mongodb-community@4.4
    ```
 
 * Install the latest 4.2.x production release of MongoDB Community Server:
-   ```
-   $ brew install mongodb-community@4.2
+   ```bash
+   brew install mongodb-community@4.2
    ```
 
  * Install the latest 4.0.x production release of MongoDB Community Server:
-   ```
-   $ brew install mongodb-community@4.0
+   ```bash
+   brew install mongodb-community@4.0
    ```
 
  * Install the latest 3.6.x production release of MongoDB Community Server:
-   ```
-   $ brew install mongodb-community@3.6
+   ```bash
+   brew install mongodb-community@3.6
    ```
 
 ## Default Paths for the mongodb-community Formula
@@ -81,42 +81,42 @@ In addition to installing the MongoDB server and tool binaries, the `mongodb-com
 
 To have `launchd` start `mongod` immediately and also restart at login, use:
 
-```
-$ brew services start mongodb-community
+```bash
+brew services start mongodb-community
 ```
 If you manage `mongod` as a service it will use the default paths listed above. To stop the server instance use:
 
-```
-$ brew services stop mongodb-community
+```bash
+brew services stop mongodb-community
 ```
 
 ### Start `mongod` manually
 
 If you don't want or need a background MongoDB service you can run:
 
-```
-$ mongod --config /usr/local/etc/mongod.conf
+```bash
+mongod --config /usr/local/etc/mongod.conf
 ```
 Note: if you do not include the `--config` option with a path to a configuration file, the MongoDB server does not have a default configuration file or log directory path and will use a data directory path of `/data/db`.
 
 To shutdown `mongod` started manually, use the `admin` database and run `db.shutdownServer()`:
 
-```
-$ mongo admin --eval "db.shutdownServer()"
+```bash
+mongo admin --eval "db.shutdownServer()"
 ```
 
 ## Uninstalling the mongodb-community Server
 
 If you need to uninstall the MongoDB Server, use:
 
-```
-$ brew uninstall mongodb-community
+```bash
+brew uninstall mongodb-community
 ```
 
 Note that this does not uninstall the bundled Database Tools. To uninstall the Database Tools, additionally run the folowing:
 
-```
-$ brew uninstall mongodb-database-tools
+```bash
+brew uninstall mongodb-database-tools
 ```
 
 ## The Documentation
