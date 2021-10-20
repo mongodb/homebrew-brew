@@ -7,8 +7,6 @@ class MongodbCommunityAT32 < Formula
   url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.2.22.tgz"
   sha256 "0f85d6e1810993cf3c02216a8b8abe20c0cde3d1fb6a9ac445ca26819f3cc2c9"
 
-  bottle :unneeded
-
   keg_only :versioned_formula
 
   def install

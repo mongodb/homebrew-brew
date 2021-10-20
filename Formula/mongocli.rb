@@ -7,7 +7,6 @@ class Mongocli < Formula
   homepage "https://github.com/mongodb/mongocli"
   version "1.16.0"
   license "Apache-2.0"
-  bottle :unneeded
   deprecate! date: "2021-06-08", because: "moved to hombrew-core"
 
   if OS.mac? && Hardware::CPU.intel?

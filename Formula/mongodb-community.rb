@@ -7,8 +7,6 @@ class MongodbCommunity < Formula
   url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.3.tgz"
   sha256 "fad04d5b2bc184d0ab0487889298d70ac1f6368043196b73d212a509848e2515"
 
-  bottle :unneeded
-
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
