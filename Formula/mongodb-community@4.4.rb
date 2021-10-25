@@ -7,8 +7,6 @@ class MongodbCommunityAT44 < Formula
   url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.9.tgz"
   sha256 "b094a5d4eee07d5eb4e308909b2a1eb589fe7b653d8322f9fc9e06d4d682980c"
 
-  bottle :unneeded
-
   depends_on "mongodb-database-tools" => :recommended
 
   keg_only :versioned_formula
