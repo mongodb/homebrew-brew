@@ -30,7 +30,8 @@ class MongodbCommunity < Formula
     storage:
       dbPath: #{var}/mongodb
     net:
-      bindIp: 127.0.0.1
+      bindIp: 127.0.0.1, ::1
+      ipv6: true
   EOS
   end
 
