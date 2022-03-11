@@ -24,6 +24,12 @@ Once the tap has been added, use the instructions below to install the software 
    $ brew install mongodb-community
    ```
 
+   If you want to check which version it is, use
+
+   ```
+   $ brew info mongodb-community
+   ``` 
+
 ### Installing only the Shell or the Database Tools
 
  * Install only the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongo` shell separately.
@@ -71,9 +77,11 @@ Alternatively, you can install a specific version of the MongoDB Server if desir
 
 In addition to installing the MongoDB server and tool binaries, the `mongodb-community` formula creates:
 
- * a configuration file: `/usr/local/etc/mongod.conf`
- * a log directory path: `/usr/local/var/log/mongodb`
- * a data directory path: `/usr/local/var/mongodb`
+| | Intel Processor | Apple M1 Processor |
+|-|-|-|
+| [configuration file](https://docs.mongodb.com/manual/reference/configuration-options/) | `/usr/local/etc/mongod.conf` | `/opt/homebrew/etc/mongod.conf` |
+| [log directory](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.path) | `/usr/local/var/log/mongodb` | `/opt/homebrew/var/log/mongodb` |
+| [data directory](https://docs.mongodb.com/manual/reference/configuration-options/#storage.dbPath) | `/usr/local/var/mongodb` | `/opt/homebrew/var/mongodb` |
 
 ## Starting the mongodb-community Server
 
@@ -94,8 +102,12 @@ $ brew services stop mongodb-community
 
 If you don't want or need a background MongoDB service you can run:
 
-```
+```bash
+# For macOS running Intel processors
 $ mongod --config /usr/local/etc/mongod.conf
+
+# For macOS running on Apple M1 processors
+$ mongod --config /opt/homebrew/etc/mongod.conf --fork
 ```
 Note: if you do not include the `--config` option with a path to a configuration file, the MongoDB server does not have a default configuration file or log directory path and will use a data directory path of `/data/db`.
 
