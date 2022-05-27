@@ -4,7 +4,7 @@ class Libmongocrypt < Formula
   url "https://github.com/mongodb/libmongocrypt/archive/1.4.0.tar.gz"
   sha256 "4185a5a0cf4aee1f211dfd3dc28310234fa278d1e696ee15beb0dccbf102388f"
   license "Apache-2.0"
-  head "https://github.com/mongodb/libmongocrypt.git"
+  head "https://github.com/mongodb/libmongocrypt.git", tag: "1.5.0-rc0"
 
   depends_on "cmake" => :build
   depends_on "mongo-c-driver" => :build
@@ -12,7 +12,7 @@ class Libmongocrypt < Formula
   def install
     cmake_args = std_cmake_args
     cmake_args << if build.head?
-      "-DBUILD_VERSION=1.5.0-pre"
+      "-DBUILD_VERSION=1.5.0-rc0"
     else
       "-DBUILD_VERSION=1.4.0"
     end
