@@ -7,6 +7,8 @@ class MongodbCommunityAT50 < Formula
   url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.7.tgz"
   sha256 "12e6764810c205f37dff761aa23156451db2c8d7adccc36ac79c6090fdbcc000"
 
+  option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
+
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
@@ -22,7 +24,8 @@ class MongodbCommunityAT50 < Formula
     end
   end
 
-  def mongodb_conf; <<~EOS
+  def mongodb_conf
+    cfg = <<~EOS
     systemLog:
       destination: file
       path: #{var}/log/mongodb/mongo.log
@@ -32,7 +35,14 @@ class MongodbCommunityAT50 < Formula
     net:
       bindIp: 127.0.0.1, ::1
       ipv6: true
-  EOS
+    EOS
+    if build.with? "enable-test-commands"
+      cfg += <<~EOS
+      setParameter:
+        enableTestCommands: 1
+      EOS
+    end
+    cfg
   end
 
   plist_options :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
