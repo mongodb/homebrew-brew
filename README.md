@@ -18,7 +18,7 @@ Once the tap has been added, use the instructions below to install the software 
 
 ### Installing the Latest mongodb-community Server, Shell, and the Database Tools Together
 
- * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the `mongo` shell, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 5.0.x.
+ * Install the latest available production release of the [MongoDB Community Server](https://docs.mongodb.com/manual/). This includes the MongoDB Server processes `mongod` and `mongos`, the [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), and the `install_compass` script to separately install [MongoDB Compass](https://docs.mongodb.com/compass/). Currently, this will install MongoDB Server 6.0.x.
 
    ```bash
    brew install mongodb-community
@@ -26,10 +26,10 @@ Once the tap has been added, use the instructions below to install the software 
 
 ### Installing only the Shell or the Database Tools
 
- * Install only the latest [`mongo` shell](https://docs.mongodb.com/manual/mongo/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongo` shell separately.
+ * Install only the latest [`mongosh` shell](https://www.mongodb.com/docs/mongodb-shell/) for connecting to remote MongoDB instances. If you installed the MongoDB Server in the step above, the shell was included in that installation. Use this command only if you need to install the `mongosh` shell separately.
 
    ```bash
-   brew install mongodb-community-shell
+   brew install mongosh
    ```
 
  * Install only the latest [MongoDB Database Tools](https://docs.mongodb.com/database-tools/), a suite of command-line tools (`mongoimport`, `mongoexport`, `mongodump`, etc) for working with a MongoDB Server instance. If you installed the MongoDB Server in the step above, the Database Tools were included in that installation. Use this command only if you need to install the Database Tools separately.
@@ -41,6 +41,11 @@ Once the tap has been added, use the instructions below to install the software 
 ### Installing a Specific Version of the mongodb-community Server
 
 Alternatively, you can install a specific version of the MongoDB Server if desired.
+
+ * Install the latest 6.0.x production release of MongoDB Community Server:
+   ```bash
+   brew install mongodb-community@6.0
+   ```
 
  * Install the latest 5.0.x production release of MongoDB Community Server:
    ```bash

@@ -1,11 +1,11 @@
-class MongodbCommunity < Formula
+class MongodbCommunityAT50 < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.0.tgz"
-  sha256 "312fccb8bc0465104533ba42ed5641c27382fd03ca52f074fbd5bc8291d28512"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.7.tgz"
+  sha256 "12e6764810c205f37dff761aa23156451db2c8d7adccc36ac79c6090fdbcc000"
 
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
