@@ -76,9 +76,14 @@ Alternatively, you can install a specific version of the MongoDB Server if desir
 
 In addition to installing the MongoDB server and tool binaries, the `mongodb-community` formula creates:
 
- * a configuration file: `/usr/local/etc/mongod.conf`
- * a log directory path: `/usr/local/var/log/mongodb`
- * a data directory path: `/usr/local/var/mongodb`
+ * a configuration file: `$(brew --prefix)/etc/mongod.conf`
+ * a log directory path: `$(brew --prefix)/var/log/mongodb`
+ * a data directory path: `$(brew --prefix)/var/mongodb`
+
+The default value for `brew --prefix` depends on your CPU architecture:
+
+  * Intel: `/usr/local`
+  * M1: `/opt/homebrew`
 
 ## Starting the mongodb-community Server
 
