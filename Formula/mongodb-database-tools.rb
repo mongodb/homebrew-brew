@@ -4,8 +4,8 @@ class MongodbDatabaseTools < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.5.3.zip"
-  sha256 "73b629a4e68307003b526c81b18e2841b1417f397de0c919c6028b2408d76a2f"
+  url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.5.4.zip"
+  sha256 "c69e2a361e49c3f6caf828441fee1c39de256134a36d7d003f3abdee49956625"
 
   def install
     prefix.install Dir["*"]
