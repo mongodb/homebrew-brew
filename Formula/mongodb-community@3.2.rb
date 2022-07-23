@@ -7,6 +7,8 @@ class MongodbCommunityAT32 < Formula
   url "https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-3.2.22.tgz"
   sha256 "0f85d6e1810993cf3c02216a8b8abe20c0cde3d1fb6a9ac445ca26819f3cc2c9"
 
+  option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
+
   keg_only :versioned_formula
 
   def install
@@ -21,7 +23,8 @@ class MongodbCommunityAT32 < Formula
     end
   end
 
-  def mongodb_conf; <<~EOS
+  def mongodb_conf
+    cfg = <<~EOS
     systemLog:
       destination: file
       path: #{var}/log/mongodb/mongo.log
@@ -29,8 +32,16 @@ class MongodbCommunityAT32 < Formula
     storage:
       dbPath: #{var}/mongodb
     net:
-      bindIp: 127.0.0.1
-  EOS
+      bindIp: 127.0.0.1, ::1
+      ipv6: true
+    EOS
+    if build.with? "enable-test-commands"
+      cfg += <<~EOS
+      setParameter:
+        enableTestCommands: 1
+      EOS
+    end
+    cfg
   end
 
   plist_options :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
