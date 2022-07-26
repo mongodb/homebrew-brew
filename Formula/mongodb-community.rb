@@ -4,13 +4,20 @@ class MongodbCommunity < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.0.tgz"
-  sha256 "312fccb8bc0465104533ba42ed5641c27382fd03ca52f074fbd5bc8291d28512"
+  if Hardware::CPU.intel?
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.0.tgz"
+    sha256 "312fccb8bc0465104533ba42ed5641c27382fd03ca52f074fbd5bc8291d28512"
+  else
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-6.0.0.tgz"
+    sha256 "aed3622e3854c85ae0de307802e593c91e5d8c59e497e659d8e42f7718db0ecb"
+  end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
 
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
+
+  conflicts_with "mongodb-enterprise"
 
   def install
     prefix.install Dir["*"]
