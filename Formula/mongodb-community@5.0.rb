@@ -12,6 +12,8 @@ class MongodbCommunityAT50 < Formula
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
+  keg_only :versioned_formula
+
   def install
     prefix.install Dir["*"]
   end

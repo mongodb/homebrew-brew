@@ -17,6 +17,8 @@ class MongodbCommunity < Formula
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
+  conflicts_with "mongodb-enterprise"
+
   def install
     prefix.install Dir["*"]
   end
