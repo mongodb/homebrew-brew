@@ -4,8 +4,8 @@ class MongodbCommunityAT50 < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.7.tgz"
-  sha256 "12e6764810c205f37dff761aa23156451db2c8d7adccc36ac79c6090fdbcc000"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-5.0.10.tgz"
+  sha256 "76f9fb5295a830fb1c66653b005cbe63849cb23ccfe2f991a5bc8a314ed5ea96"
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
 
