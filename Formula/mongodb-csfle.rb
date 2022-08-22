@@ -5,13 +5,11 @@ class MongodbCsfle < Formula
   license "MongoDB Customer Agreement"
 
   if Hardware::CPU.arm?
-    # TODO(MONGOSH-1193): Bump to production version after 6.0 is released
-    url "https://downloads.mongodb.com/osx/mongo_csfle_v1-macos-arm64-enterprise-6.0.0-rc4.tgz"
-    sha256 "5e5bc88bcadf256c7dcea08a7aa55a552630de6e6919fcf3215b5e8171231c03"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-6.0.1.tgz"
+    sha256 "5235a769eba0f2206a1442f3e9850805672b89da85cfcc885d35853d5cdf3103"
   else
-    # TODO(MONGOSH-1193): Bump to production version after 6.0 is released
-    url "https://downloads.mongodb.com/osx/mongo_csfle_v1-macos-x86_64-enterprise-6.0.0-rc4.tgz"
-    sha256 "4f1043d8b07ace6032a52eb41b193b3380061a7564ce21ffae24b1ccc0e5c558"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-x86_64-enterprise-6.0.1.tgz"
+    sha256 "6f8340cba8f4df756b9327f2bcded1ab529c16da3b4f622fc3bcdf9f6cd1795f"
   end
 
 
