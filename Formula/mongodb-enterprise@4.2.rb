@@ -4,8 +4,8 @@ class MongodbEnterpriseAT42 < Formula
 
   # frozen_string_literal: true
 
-  url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-4.2.22.tgz"
-  sha256 "64e25068560cde6dc1ba712da303573c0f4a45f34d6ad4742d6f70e2ef16b748"
+  url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-4.2.23.tgz"
+  sha256 "99038e799964bf33a2dc54113fd5fc03924279736aee77ff09e68c049dd5efff"
   license "MongoDB Customer Agreement"
 
   def caveats
