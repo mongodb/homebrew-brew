@@ -107,7 +107,7 @@ To shutdown `mongod` started manually, use the `admin` database and run `db.shut
 mongosh admin --eval "db.shutdownServer()"
 ```
 
- * Shutdown for MongoDB Community Server 5.5 and below:
+ * Shutdown for MongoDB Community Server 5.0 and below:
 
 ```bash
 mongo admin --eval "db.shutdownServer()"
