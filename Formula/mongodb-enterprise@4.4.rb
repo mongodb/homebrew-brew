@@ -53,44 +53,11 @@ class MongodbEnterpriseAT44 < Formula
     cfg
   end
 
-  plist_options :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
-
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>Label</key>
-      <string>#{plist_name}</string>
-      <key>ProgramArguments</key>
-      <array>
-        <string>#{opt_bin}/mongod</string>
-        <string>--config</string>
-        <string>#{etc}/mongod.conf</string>
-      </array>
-      <key>RunAtLoad</key>
-      <true/>
-      <key>KeepAlive</key>
-      <false/>
-      <key>WorkingDirectory</key>
-      <string>#{HOMEBREW_PREFIX}</string>
-      <key>StandardErrorPath</key>
-      <string>#{var}/log/mongodb/output.log</string>
-      <key>StandardOutPath</key>
-      <string>#{var}/log/mongodb/output.log</string>
-      <key>HardResourceLimits</key>
-      <dict>
-        <key>NumberOfFiles</key>
-        <integer>64000</integer>
-      </dict>
-      <key>SoftResourceLimits</key>
-      <dict>
-        <key>NumberOfFiles</key>
-        <integer>64000</integer>
-      </dict>
-    </dict>
-    </plist>
-  EOS
+  service do
+    run [opt_bin/"mongod", "--config", etc/"mongod.conf"]
+    working_dir HOMEBREW_PREFIX
+    log_path var/"log/mongodb/output.log"
+    error_log_path var/"log/mongodb/output.log"
   end
 
   test do
