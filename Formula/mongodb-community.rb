@@ -52,7 +52,7 @@ class MongodbCommunity < Formula
     cfg
   end
 
-  plist_options :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
+  service.require_root :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
