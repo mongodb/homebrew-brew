@@ -4,8 +4,8 @@ class MongodbCommunityShell < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-shell-macos-x86_64-5.0.14.tgz"
-  sha256 "fc634f06ca9a5d151d714fc1792b0359051286022d8eca15f26550b19397247b"
+  url "https://fastdl.mongodb.org/osx/mongodb-shell-macos-x86_64-5.0.15.tgz"
+  sha256 "9bbfe2d8b8d62b644cfe91f4bcc86fed4e50569cf32ad249e9e974e71fa4f5a7"
 
   def install
     prefix.install Dir["*"]
