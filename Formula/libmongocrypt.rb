@@ -1,8 +1,8 @@
 class Libmongocrypt < Formula
   desc "C library for Client Side Encryption"
   homepage "https://github.com/mongodb/libmongocrypt"
-  url "https://github.com/mongodb/libmongocrypt/archive/1.7.3.tar.gz"
-  sha256 "96b6d9941fdd6df9ded52a01193e71dd942dc2a209d1c8350562945eb8ff41a1"
+  url "https://github.com/mongodb/libmongocrypt/archive/1.7.4.tar.gz"
+  sha256 "354e089430a73355c2756ae06bcd9df343c93c2389e23879064b003410045e86"
   license "Apache-2.0"
   head "https://github.com/mongodb/libmongocrypt.git"
 
@@ -14,7 +14,7 @@ class Libmongocrypt < Formula
     cmake_args << if build.head?
       "-DBUILD_VERSION=1.8.0-pre"
     else
-      "-DBUILD_VERSION=1.7.3"
+      "-DBUILD_VERSION=1.7.4"
     end
     system "cmake", ".", *cmake_args
     system "make", "install"
