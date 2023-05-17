@@ -5,11 +5,11 @@ class MongodbEnterprise < Formula
   # frozen_string_literal: true
   #
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-6.0.5.tgz"
-    sha256 "dbe34da2815e5112acf38f31f3a07e766576b4a74ea0c671d65e19e62290af0e"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-6.0.6.tgz"
+    sha256 "34ab62f31d88462a8b1361903ac4248e1df4425b9184845f05ccf226201b1f6b"
   else
-    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-6.0.5.tgz"
-    sha256 "da815eac598160b95914d199a70c49e401982b5083d442675abf143498645f8e"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-6.0.6.tgz"
+    sha256 "e9a653ce5147a7bed23d56e4ba8b1dd958cbbc9893f507e2c9c9ef2c7f8a379b"
   end
 
   license "MongoDB Customer Agreement"
@@ -28,6 +28,16 @@ class MongodbEnterprise < Formula
   conflicts_with "mongodb-community"
 
   def install
+    
+    inreplace "macos_mongodb.plist" do |s|
+      s.gsub!("\#{plist_name}", "#{plist_name}")
+      s.gsub!("\#{opt_bin}", "#{opt_bin}")
+      s.gsub!("\#{etc}", "#{etc}")
+      s.gsub!("\#{HOMEBREW_PREFIX}", "#{HOMEBREW_PREFIX}")
+      s.gsub!("\#{var}", "#{var}")
+    end
+
+    prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
     prefix.install Dir["*"]
   end
 
@@ -58,13 +68,6 @@ class MongodbEnterprise < Formula
       EOS
     end
     cfg
-  end
-
-  service do
-    run [opt_bin/"mongod", "--config", etc/"mongod.conf"]
-    working_dir HOMEBREW_PREFIX
-    log_path var/"log/mongodb/output.log"
-    error_log_path var/"log/mongodb/output.log"
   end
 
   test do

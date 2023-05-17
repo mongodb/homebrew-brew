@@ -4,8 +4,8 @@ class MongodbEnterpriseAT44 < Formula
 
   # frozen_string_literal: true
 
-  url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-4.4.19.tgz"
-  sha256 "0f373febe5761b713b20f8602fc341a07c39c1e3526e44452130cb0ee81ecbdc"
+  url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-4.4.21.tgz"
+  sha256 "0a3b65220dedd304445b52002711fdcf52a6256dde2560a4af1a54c23309948f"
   license "MongoDB Customer Agreement"
 
   def caveats
@@ -21,6 +21,16 @@ class MongodbEnterpriseAT44 < Formula
   keg_only :versioned_formula
 
   def install
+    
+    inreplace "macos_mongodb.plist" do |s|
+      s.gsub!("\#{plist_name}", "#{plist_name}")
+      s.gsub!("\#{opt_bin}", "#{opt_bin}")
+      s.gsub!("\#{etc}", "#{etc}")
+      s.gsub!("\#{HOMEBREW_PREFIX}", "#{HOMEBREW_PREFIX}")
+      s.gsub!("\#{var}", "#{var}")
+    end
+
+    prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
     prefix.install Dir["*"]
   end
 
@@ -51,13 +61,6 @@ class MongodbEnterpriseAT44 < Formula
       EOS
     end
     cfg
-  end
-
-  service do
-    run [opt_bin/"mongod", "--config", etc/"mongod.conf"]
-    working_dir HOMEBREW_PREFIX
-    log_path var/"log/mongodb/output.log"
-    error_log_path var/"log/mongodb/output.log"
   end
 
   test do
