@@ -4,8 +4,8 @@ class MongodbCommunityAT44 < Formula
 
   # frozen_string_literal: true
 
-  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.19.tgz"
-  sha256 "c5e328a0e9b2059b2ee4f25eb8fa94d2182c238a828cb1f0de814b32a32e273d"
+  url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.21.tgz"
+  sha256 "ebfaee7f08cdb1e5aa3cc32af44cca08f291153fac9d0f3af5c48245d57e84b3"
 
   depends_on "mongodb-database-tools" => :recommended
 
@@ -14,6 +14,16 @@ class MongodbCommunityAT44 < Formula
   keg_only :versioned_formula
 
   def install
+
+    inreplace "macos_mongodb.plist" do |s|
+      s.gsub!("\#{plist_name}", "#{plist_name}")
+      s.gsub!("\#{opt_bin}", "#{opt_bin}")
+      s.gsub!("\#{etc}", "#{etc}")
+      s.gsub!("\#{HOMEBREW_PREFIX}", "#{HOMEBREW_PREFIX}")
+      s.gsub!("\#{var}", "#{var}")
+    end
+
+    prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
     prefix.install Dir["*"]
   end
 
@@ -44,13 +54,6 @@ class MongodbCommunityAT44 < Formula
       EOS
     end
     cfg
-  end
-
-  service do
-    run [opt_bin/"mongod", "--config", etc/"mongod.conf"]
-    working_dir HOMEBREW_PREFIX
-    log_path var/"log/mongodb/output.log"
-    error_log_path var/"log/mongodb/output.log"
   end
 
   test do
