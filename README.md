@@ -57,11 +57,6 @@ Alternatively, you can install a specific version of the MongoDB Server if desir
    brew install mongodb-community@4.4
    ```
 
-* Install the latest 4.2.x production release of MongoDB Community Server:
-   ```bash
-   brew install mongodb-community@4.2
-   ```
-
 ## Default Paths for the mongodb-community Formula
 
 In addition to installing the MongoDB server and tool binaries, the `mongodb-community` formula creates:
