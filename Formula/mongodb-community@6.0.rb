@@ -1,23 +1,15 @@
-class MongodbEnterprise < Formula
-  desc "High-performance, schema-free, document-oriented database (Enterprise)"
+class MongodbCommunity < Formula
+  desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
-  #
+
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-7.0.0.tgz"
-    sha256 "ac56a1997edb3b5a511263d89b878376e484383261d51d14fd542145f73b480d"
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.6.tgz"
+    sha256 "61ea12cc65bc47b3ed87e550147eb0b9a513db812165a4b5d1a5841d68280045"
   else
-    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-7.0.0.tgz"
-    sha256 "992a50092208495aa0e505e63ba8fa45c5ce317e429a8040c11c95eab65f06d6"
-  end
-
-  license "MongoDB Customer Agreement"
-
-  def caveats
-    <<~EOS
-      MongoDB Enterprise is licensed under the MongoDB Customer Agreement (https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use MongoDB Enterprise without a commercial license from MongoDB.
-    EOS
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-6.0.6.tgz"
+    sha256 "a3ddf886901c59f185cc232282a0dcfa358d14cf48cb49d72b638d87df8eefd9"
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
@@ -25,10 +17,9 @@ class MongodbEnterprise < Formula
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
-  conflicts_with "mongodb-community"
+  conflicts_with "mongodb-enterprise"
 
   def install
-    
     inreplace "macos_mongodb.plist" do |s|
       s.gsub!("\#{plist_name}", "#{plist_name}")
       s.gsub!("\#{opt_bin}", "#{opt_bin}")
@@ -37,8 +28,8 @@ class MongodbEnterprise < Formula
       s.gsub!("\#{var}", "#{var}")
     end
 
-    prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
     prefix.install Dir["*"]
+    prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
   end
 
   def post_install
