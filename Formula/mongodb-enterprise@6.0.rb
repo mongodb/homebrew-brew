@@ -1,4 +1,4 @@
-class MongodbEnterprise < Formula
+class MongodbEnterpriseAT60 < Formula
   desc "High-performance, schema-free, document-oriented database (Enterprise)"
   homepage "https://www.mongodb.com/"
 
