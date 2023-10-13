@@ -130,6 +130,8 @@ For more information, please reference the following documentation:
 
 * [The MongoDB Database Tools Documentation](https://docs.mongodb.com/database-tools/)
 
+* [Employees of MongoDB Updating Homebrew Tap](https://github.com/10gen/mongo-release-tools#update-monogodb-homebrew-tap)
+
 ## Additional Information and Problem Reporting
 
 This tap was created using the Homebrew documentation on [How to Create and Maintain a tap](https://github.com/Homebrew/brew/blob/master/docs/How-to-Create-and-Maintain-a-Tap.md).
@@ -139,3 +141,5 @@ You can find additional information in the [Homebrew project README](https://git
 If you're having issues with MongoDB please check out [our community support resources](https://www.mongodb.com/community-support-resources).
 
 If you've found a bug please [open a JIRA ticket in the SERVER project](https://jira.mongodb.org).
+
+If you are a mongodb employee and are trying to update this tap please see [internal documentation](https://github.com/10gen/mongo-release-tools#update-monogodb-homebrew-tap).
