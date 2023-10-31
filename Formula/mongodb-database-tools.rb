@@ -5,11 +5,11 @@ class MongodbDatabaseTools < Formula
   # frozen_string_literal: true
 
   if Hardware::CPU.intel?
-    url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.8.0.zip"
-    sha256 "2f5147678df476fcfe4527eedecbc868e2cc68484f15964dea1bd1ea6494fde8"
+    url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.9.0.zip"
+    sha256 "5b090f519b39dadcf4b94c4bf175f4405ffec62ee049386f5898c90804600ef2"
   else
-    url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.8.0.zip"
-    sha256 "63618cb61875d0e73c95b03e5c70f99906dbcb464326d31f4f0568ef9bedb3f7"
+    url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.9.0.zip"
+    sha256 "dc0b0ab3dc53c7f905f6784e34ee23187fcf4b7e10834d5910747d13201cf4a4"
   end
   
   def install
