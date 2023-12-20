@@ -41,6 +41,10 @@ class MongodbEnterpriseAT60 < Formula
     prefix.install Dir["*"]
   end
 
+  service do
+    name macos: "#{plist_name}"
+  end
+
   def post_install
     (var/"mongodb").mkpath
     (var/"log/mongodb").mkpath

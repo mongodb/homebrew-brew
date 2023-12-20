@@ -36,6 +36,10 @@ class MongodbCommunityAT50 < Formula
     end
   end
 
+  service do
+    name macos: "#{plist_name}"
+  end
+
   def mongodb_conf
     cfg = <<~EOS
     systemLog:
