@@ -1,8 +1,8 @@
 class Libmongocrypt < Formula
   desc "C library for Client Side Encryption"
   homepage "https://github.com/mongodb/libmongocrypt"
-  url "https://github.com/mongodb/libmongocrypt/archive/1.8.4.tar.gz"
-  sha256 "e258b55259a0e41415c7de61978151bdb6ee4042b67f236edb4598b052c4f295"
+  url "https://github.com/mongodb/libmongocrypt/archive/1.9.0.tar.gz"
+  sha256 "9f14d67d2b939bf7dbd75a2c184740a9150d9e5f9a06fdc8fff7720b20a6b708"
   license "Apache-2.0"
   head "https://github.com/mongodb/libmongocrypt.git"
 
@@ -12,10 +12,13 @@ class Libmongocrypt < Formula
   def install
     cmake_args = std_cmake_args
     cmake_args << if build.head?
-      "-DBUILD_VERSION=1.9.0-pre"
+      "-DBUILD_VERSION=1.10.0-pre"
     else
-      "-DBUILD_VERSION=1.8.4"
+      "-DBUILD_VERSION=1.9.0"
     end
+    # Homebrew includes FETCHCONTENT_FULLY_DISCONNECTED=ON as part of https://github.com/Homebrew/brew/pull/17075
+    # Set back the previous default to prevent build failure.
+    cmake_args << "-DFETCHCONTENT_FULLY_DISCONNECTED=OFF"
     system "cmake", ".", *cmake_args
     system "make", "install"
   end
