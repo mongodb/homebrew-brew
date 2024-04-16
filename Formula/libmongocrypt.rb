@@ -16,6 +16,9 @@ class Libmongocrypt < Formula
     else
       "-DBUILD_VERSION=1.9.0"
     end
+    # Homebrew includes FETCHCONTENT_FULLY_DISCONNECTED=ON as part of https://github.com/Homebrew/brew/pull/17075
+    # Set back the previous default to prevent build failure.
+    cmake_args << "-DFETCHCONTENT_FULLY_DISCONNECTED=OFF"
     system "cmake", ".", *cmake_args
     system "make", "install"
   end
