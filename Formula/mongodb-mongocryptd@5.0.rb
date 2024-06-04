@@ -2,8 +2,8 @@ class MongodbMongocryptdAT50 < Formula
   desc "mongocryptd service for Client Side Encryption"
   homepage "https://www.mongodb.com/"
 
-  url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-5.0.26.tgz"
-  sha256 "b4c7f5b8e6409aa54bcde265ad0bdc1f9e283d01c43927f0c7f58572e0c5a622"
+  url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-5.0.27.tgz"
+  sha256 "4e01d797d7f2658dc1618d003c928e6e631748fc7365e25fe61d68e63f455fe3"
   license "MongoDB Customer Agreement"
 
   def caveats
