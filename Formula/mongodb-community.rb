@@ -9,7 +9,7 @@ class MongodbCommunity < Formula
     sha256 "9b0f70feacf7c41542ee7d0905e2f8090b09d5b8413f0c9079406c09afd7a2c0"
   else
     url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-7.0.14.tgz"
-    sha256 "8805f8b33801cd07b90118c25e507b0de21c6ad426b375fbe49e896ffc575d0e"
+    sha256 "bf0e5deab684278a2014af55e38abad8a119ea1ef45d79d762e0c1795efe53b7"
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
