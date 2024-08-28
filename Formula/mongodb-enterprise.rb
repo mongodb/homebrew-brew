@@ -9,7 +9,7 @@ class MongodbEnterprise < Formula
     sha256 "1b1f7287325e1e2937efbc2b74db59ac9fe4ee1c30c2565bd7e2518a926e9d6b"
   else
     url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-7.0.14.tgz"
-    sha256 "099e133279dddfa7e036b6721b9768fe9c8cb4c583f1a4b08cbc555755b57327"
+    sha256 "dfe43f605c81b0be0d36d7d6558d7bb5c598e758c3862aba9bd9af58577600d7"
   end
 
   license "MongoDB Customer Agreement"
