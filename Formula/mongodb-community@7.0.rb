@@ -1,15 +1,15 @@
-class MongodbCommunityAT60 < Formula
+class MongodbCommunity < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
 
   if Hardware::CPU.intel?
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.18.tgz"
-    sha256 "1cd23f3c5445f00f409622476368e3e88d13e04535efd770582b8d4a7243d32d"
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-7.0.14.tgz"
+    sha256 "9b0f70feacf7c41542ee7d0905e2f8090b09d5b8413f0c9079406c09afd7a2c0"
   else
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-6.0.18.tgz"
-    sha256 "4d9d0bdb3efd7e32721d85bc5c3b4f829f80a6b5b18db727478a9b6a21209621"
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-7.0.14.tgz"
+    sha256 "8805f8b33801cd07b90118c25e507b0de21c6ad426b375fbe49e896ffc575d0e"
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
