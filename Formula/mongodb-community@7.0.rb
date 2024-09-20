@@ -18,6 +18,12 @@ class MongodbCommunityAT70 < Formula
   depends_on "mongosh" => :recommended
 
   conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-enterprise@5.0"
+  conflicts_with "mongodb-enterprise@6.0"
+  conflicts_with "mongodb-enterprise@7.0"
+  conflicts_with "mongodb-community"
+  conflicts_with "mongodb-community@5.0"
+  conflicts_with "mongodb-community@6.0"
 
   def install
     inreplace "macos_mongodb.plist" do |s|
@@ -28,7 +34,7 @@ class MongodbCommunityAT70 < Formula
       s.gsub!("\#{var}", "#{var}")
     end
 
-    prefix.install Dir["*"]
+    prefix.install Dir["*"]    
     prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
   end
 

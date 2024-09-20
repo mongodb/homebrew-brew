@@ -6,6 +6,11 @@ class MongodbMongocryptdAT50 < Formula
   sha256 "6c0ef5f33b1d9b4be32262fe2da98e20b27622f340c276666caaaf5713e421cd"
   license "MongoDB Customer Agreement"
 
+  conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-enterprise@5.0"
+  conflicts_with "mongodb-enterprise@6.0"
+  conflicts_with "mongodb-enterprise@7.0"
+
   def caveats
     <<~EOS
       mongocryptd is licensed under the MongoDB Customer Agreement (https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use mongocryptd without a commercial license from MongoDB.
