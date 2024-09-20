@@ -1,4 +1,4 @@
-class MongodbMongocryptd < Formula
+class MongodbMongocryptdAT70 < Formula
   desc "mongocryptd service for Client Side Encryption"
   homepage "https://www.mongodb.com/"
 
