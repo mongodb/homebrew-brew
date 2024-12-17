@@ -11,8 +11,15 @@ class MongodbCommunityAT50 < Formula
 
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
+  depends_on "mongodb-community-shell" => :optional
 
-  keg_only :versioned_formula
+  conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-enterprise@5.0"
+  conflicts_with "mongodb-enterprise@6.0"
+  conflicts_with "mongodb-enterprise@7.0"
+  conflicts_with "mongodb-community"
+  conflicts_with "mongodb-community@6.0"
+  conflicts_with "mongodb-community@7.0"
 
   def install
     
