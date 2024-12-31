@@ -18,6 +18,12 @@ class MongodbCommunityAT60 < Formula
   depends_on "mongosh" => :recommended
 
   conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-enterprise@5.0"
+  conflicts_with "mongodb-enterprise@6.0"
+  conflicts_with "mongodb-enterprise@7.0"
+  conflicts_with "mongodb-community"
+  conflicts_with "mongodb-community@5.0"
+  conflicts_with "mongodb-community@7.0"
 
   def install
     inreplace "macos_mongodb.plist" do |s|
