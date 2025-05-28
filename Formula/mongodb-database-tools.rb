@@ -9,7 +9,7 @@ class MongodbDatabaseTools < Formula
     sha256 "ba21e390ee11955e3d5282bbabe58c0bdfb37cb29a0b5bf320554c284019f626"
   else
     url "https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.12.1.zip"
-    sha256 "e5fed4b2ab8d67f54067c947446333337a187301a3b41bb5d8b9b3f009dac0d2"
+    sha256 "477927da8c9ac1f6006899627d903c345e61ac152c9896df3646131631bd0072"
   end
   
   def install
