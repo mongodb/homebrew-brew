@@ -5,11 +5,11 @@ class MongodbCsfle < Formula
   license "MongoDB Customer Agreement"
 
   if Hardware::CPU.arm?
-    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-6.0.23.tgz"
-    sha256 "036532aca1699537c6ea1555e4b34683a0f5e3b98d09129e6474f977b04e18e2"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-6.0.24.tgz"
+    sha256 "770bf2b1c4267fcb09a0cca65ead94daf50b0fa79c4aa90037a054e689c22382"
   else
-    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-x86_64-enterprise-6.0.23.tgz"
-    sha256 "99fe6dd228903d46a7a8af02045aca81b70b7ed4c8e6fc758cdc17f44aed70c1"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-x86_64-enterprise-6.0.24.tgz"
+    sha256 "33548e7e1c53fcbc89ead0ae032f5f0fd3cc41c680c43d26ef20322b4fe2d3da"
   end
 
 
