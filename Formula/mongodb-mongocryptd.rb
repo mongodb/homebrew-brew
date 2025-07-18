@@ -3,11 +3,11 @@ class MongodbMongocryptd < Formula
   homepage "https://www.mongodb.com/"
 
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-8.0.10.tgz"
-    sha256 "0cc6d19dd3de5a6de77f84f8ee11001de759676b3ac1c37c74d0b12aa84439c2"
+    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-8.0.12.tgz"
+    sha256 "170b89ef53a0d3d7129a78564e1ce98a46b91c3ca917965314a370a5d266f9ca"
   else
-    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-8.0.10.tgz"
-    sha256 "0346b5063c883956d79cb07cafff4a7e4a46e25f2de68575c9b5ee0bcab5b439"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-8.0.12.tgz"
+    sha256 "b293d6428c406956a6dac5a2f8b95c2a180a77168c4efc24623b6a35c389f374"
   end
   license "MongoDB Customer Agreement"
 
