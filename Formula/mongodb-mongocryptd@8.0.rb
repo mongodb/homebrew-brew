@@ -1,13 +1,13 @@
-class MongodbMongocryptd < Formula
+class MongodbMongocryptdAT80 < Formula
   desc "mongocryptd service for Client Side Encryption"
   homepage "https://www.mongodb.com/"
 
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-8.2.0.tgz"
-    sha256 "f95304bab71a6840393ef537937ad91be0e28ec72ef9ec1c048f1c58656e3916"
+    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-8.0.13.tgz"
+    sha256 "150213100503844360e7794e9ec997a04220f1c7a5e61869bd0971463eb9218a"
   else
-    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-8.2.0.tgz"
-    sha256 "51dac50c7b6248adbaf708d2ee27293aa81b3a2582a806b0e8f1202d1324cad4"
+    url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-8.0.13.tgz"
+    sha256 "84bee8963193cd1ae6320cb677cbe62a0243fa8c217db88624f8416247b88006"
   end
   license "MongoDB Customer Agreement"
 

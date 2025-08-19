@@ -1,15 +1,23 @@
-class MongodbCommunity < Formula
-  desc "High-performance, schema-free, document-oriented database"
+class MongodbEnterpriseAT80 < Formula
+  desc "High-performance, schema-free, document-oriented database (Enterprise)"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
-
+  #
   if Hardware::CPU.intel?
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-8.2.0.tgz"
-    sha256 "0e9b3c35b68e27ca79b421e64dd23462c9fbfe53dbce10f70091723d93a2dd3b"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-8.0.13.tgz"
+    sha256 "04fef8ccb6c1f9854623b8c5730060f3cf68ee7abe28b7d03382d34453a86e23"
   else
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-8.2.0.tgz"
-    sha256 "ca605ebee6321493bc0cadac749e00f70b40ef7cdd6406d62644ed449b7b736c"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-8.0.13.tgz"
+    sha256 "cb900fa573c4aad44a61ffc53b9296ab38f6b005c2a36cfa4c7971fbff44b9e5"
+  end
+
+  license "MongoDB Customer Agreement"
+
+  def caveats
+    <<~EOS
+      MongoDB Enterprise is licensed under the MongoDB Customer Agreement (https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use MongoDB Enterprise without a commercial license from MongoDB.
+    EOS
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
@@ -17,9 +25,10 @@ class MongodbCommunity < Formula
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
-  conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-community"
 
   def install
+    
     inreplace "macos_mongodb.plist" do |s|
       s.gsub!("\#{plist_name}", "#{plist_name}")
       s.gsub!("\#{opt_bin}", "#{opt_bin}")
@@ -28,8 +37,8 @@ class MongodbCommunity < Formula
       s.gsub!("\#{var}", "#{var}")
     end
 
-    prefix.install Dir["*"]
     prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
+    prefix.install Dir["*"]
   end
 
   def post_install
