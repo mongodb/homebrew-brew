@@ -21,6 +21,10 @@ class Libmongocrypt < Formula
     cmake_args << "-DMONGOCRYPT_MONGOC_DIR=USE-SYSTEM"
     cmake_args << "-DUSE_SHARED_LIBBSON=ON"
     cmake_args << "-DENABLE_ONLINE_TESTS=OFF"
+
+    # Allow FetchContent to build the bundled IntelDFP tarball.
+    cmake_args << "-DHOMEBREW_ALLOW_FETCHCONTENT=ON"
+
     system "cmake", ".", *cmake_args
     system "make", "install"
   end
