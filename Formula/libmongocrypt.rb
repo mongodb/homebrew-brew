@@ -7,7 +7,6 @@ class Libmongocrypt < Formula
   head "https://github.com/mongodb/libmongocrypt.git"
 
   depends_on "cmake" => :build
-  depends_on "mongo-c-driver" => :build
 
   def install
     cmake_args = std_cmake_args
@@ -17,12 +16,12 @@ class Libmongocrypt < Formula
       "-DBUILD_VERSION=1.16.0"
     end
 
-    # Use the system-installed mongo-c-driver:
-    cmake_args << "-DMONGOCRYPT_MONGOC_DIR=USE-SYSTEM"
-    cmake_args << "-DUSE_SHARED_LIBBSON=ON"
     cmake_args << "-DENABLE_ONLINE_TESTS=OFF"
-
-    # Allow FetchContent to build the bundled IntelDFP tarball.
+    # Homebrew includes FETCHCONTENT_FULLY_DISCONNECTED=ON as part of https://github.com/Homebrew/brew/pull/17075
+    # Set back the previous default to prevent build failure.
+    cmake_args << "-DFETCHCONTENT_FULLY_DISCONNECTED=OFF"
+    # TODO(MONGOCRYPT-854): Use mongo-c-driver package rather than auto-download.
+    # Allow FetchContent to build the bundled IntelDFP tarball and auto-download the C driver.
     cmake_args << "-DHOMEBREW_ALLOW_FETCHCONTENT=ON"
 
     system "cmake", ".", *cmake_args
