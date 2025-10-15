@@ -11,6 +11,11 @@ class MongodbMongocryptd < Formula
   end
   license "MongoDB Customer Agreement"
 
+  conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-enterprise@5.0"
+  conflicts_with "mongodb-enterprise@6.0"
+  conflicts_with "mongodb-enterprise@7.0"
+
   def caveats
     <<~EOS
       mongocryptd is licensed under the MongoDB Customer Agreement (https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use mongocryptd without a commercial license from MongoDB.
