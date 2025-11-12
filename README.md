@@ -140,6 +140,6 @@ You can find additional information in the [Homebrew project README](https://git
 
 If you're having issues with MongoDB please check out [our community support resources](https://www.mongodb.com/community-support-resources).
 
-If you've found a bug please [open a JIRA ticket in the SERVER project](https://jira.mongodb.org).
+If you've found a bug in MongoDB please [open a JIRA ticket in the SERVER project](https://jira.mongodb.org).
 
 If you are a mongodb employee and are trying to update this tap please see [internal documentation](https://github.com/10gen/mongo-release-tools#update-monogodb-homebrew-tap).
