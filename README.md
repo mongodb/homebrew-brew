@@ -42,19 +42,14 @@ Once the tap has been added, use the instructions below to install the software 
 
 Alternatively, you can install a specific version of the MongoDB Server if desired.
 
- * Install the latest 6.0.x production release of MongoDB Community Server:
+ * Install the latest 8.0.x production release of MongoDB Community Server:
    ```bash
-   brew install mongodb-community@6.0
+   brew install mongodb-community@8.0
    ```
 
- * Install the latest 5.0.x production release of MongoDB Community Server:
+ * Install the latest 7.0.x production release of MongoDB Community Server:
    ```bash
-   brew install mongodb-community@5.0
-   ```
-
- * Install the latest 4.4.x production release of MongoDB Community Server:
-   ```bash
-   brew install mongodb-community@4.4
+   brew install mongodb-community@7.0
    ```
 
 ## Default Paths for the mongodb-community Formula
@@ -96,16 +91,8 @@ Note: if you do not include the `--config` option with a path to a configuration
 
 To shutdown `mongod` started manually, use the `admin` database and run `db.shutdownServer()`:
 
- * Shutdown for MongoDB Community Server 6.x and up:
-
 ```bash
 mongosh admin --eval "db.shutdownServer()"
-```
-
- * Shutdown for MongoDB Community Server 5.0 and below:
-
-```bash
-mongo admin --eval "db.shutdownServer()"
 ```
 
 ## Uninstalling the mongodb-community Server
