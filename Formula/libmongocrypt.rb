@@ -23,8 +23,12 @@ class Libmongocrypt < Formula
     # TODO(MONGOCRYPT-854): Use mongo-c-driver package rather than auto-download.
     # Allow FetchContent to build the bundled IntelDFP tarball and auto-download the C driver.
     cmake_args << "-DHOMEBREW_ALLOW_FETCHCONTENT=ON"
+    # Do not build 'all' target, to skip building unnecessary tests.
+    cmake_args << "-DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON"
 
     system "cmake", ".", *cmake_args
+    # Build minimal targets needed for install:
+    system "make", "mongocrypt", "mongocrypt_static", "kms_message", "kms_message_static"
     system "make", "install"
   end
 
