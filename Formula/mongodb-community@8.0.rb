@@ -5,11 +5,11 @@ class MongodbCommunityAT80 < Formula
   # frozen_string_literal: true
 
   if Hardware::CPU.intel?
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-8.0.19.tgz"
-    sha256 "00941bf062da895f8ed515daa2b3bd72cf1b044379e39fac82eba55ad1f12c2d"
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-8.0.20.tgz"
+    sha256 "0cddcee05d2b1f5ca55251e205ed6c4072d223fc9359c1bf8d2ad15f3f406f74"
   else
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-8.0.19.tgz"
-    sha256 "a8a158226d3f2f9fb0618f19473b8a45cd993b12df79f6a1957e450406898b2b"
+    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-8.0.20.tgz"
+    sha256 "3aeda22011446292a48c1633b4fc74ae566bd4f0b8dd663f69b0ce4cbfd18566"
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
