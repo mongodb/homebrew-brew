@@ -1,15 +1,23 @@
-class MongodbCommunity < Formula
-  desc "High-performance, schema-free, document-oriented database"
+class MongodbEnterprise < Formula
+  desc "High-performance, schema-free, document-oriented database (Enterprise)"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
-
+  #
   if Hardware::CPU.intel?
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-8.3.2.tgz"
-    sha256 "3f05885d9082c037b1348a3e8f4d9bfb9d8ae57704c5b2d00d01c15e86049998"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-8.2.9.tgz"
+    sha256 "0d59b844bf7c840ef8ee7cc00c593d065559c725ce00c5af9f294a97023584fa"
   else
-    url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-8.3.2.tgz"
-    sha256 "5b41441da3d74f49accaddc8bd5d9b0ef9f19080e0e8365b0224f320a1de5b5d"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-8.2.9.tgz"
+    sha256 "254971f57da0dfcc2b59f98c48359bfc1adf50c3b3812706bc4d19643e73e974"
+  end
+
+  license "MongoDB Customer Agreement"
+
+  def caveats
+    <<~EOS
+      MongoDB Enterprise is licensed under the MongoDB Customer Agreement (https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use MongoDB Enterprise without a commercial license from MongoDB.
+    EOS
   end
 
   option "with-enable-test-commands", "Configures MongoDB to allow test commands such as failpoints"
@@ -17,9 +25,10 @@ class MongodbCommunity < Formula
   depends_on "mongodb-database-tools" => :recommended
   depends_on "mongosh" => :recommended
 
-  conflicts_with "mongodb-enterprise"
+  conflicts_with "mongodb-community"
 
   def install
+    
     inreplace "macos_mongodb.plist" do |s|
       s.gsub!("\#{plist_name}", "#{plist_name}")
       s.gsub!("\#{opt_bin}", "#{opt_bin}")
@@ -28,8 +37,8 @@ class MongodbCommunity < Formula
       s.gsub!("\#{var}", "#{var}")
     end
 
-    prefix.install Dir["*"]
     prefix.install_symlink "macos_mongodb.plist" => "#{plist_name}.plist"
+    prefix.install Dir["*"]
   end
 
   def post_install
