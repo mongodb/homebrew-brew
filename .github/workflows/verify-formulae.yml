@@ -1,0 +1,102 @@
+name: Verify formulae
+
+# Validates any Formula/*.rb changed by a pull request by installing it with
+# Homebrew on both a macOS Intel and an Apple-Silicon runner. `brew install`
+# verifies the arch-appropriate `sha256` (it fails on a mismatch) and loads the
+# formula (catching e.g. a class name that doesn't match the file). Because the
+# formulae are arch-conditional, the two runners together cover the x86_64 and
+# arm64 pins. Gates automated formula-bump PRs (e.g. from `mr homebrew release`).
+
+on:
+  pull_request:
+    paths:
+      - "Formula/**.rb"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-formulae-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel # x86_64
+            arch: x86_64
+          - runner: macos-15 # Apple Silicon (arm64)
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    name: install (${{ matrix.arch }})
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_ENV_HINTS: "1"
+      # Read formulae from the tapped checkout below, not the Homebrew JSON API.
+      HOMEBREW_NO_INSTALL_FROM_API: "1"
+      # Pass via env (not direct ${{ }} interpolation) so a crafted branch name
+      # can't inject shell commands into the run script.
+      BASE_REF: ${{ github.base_ref }}
+    steps:
+      - name: Check out PR
+        uses: actions/checkout@v4
+
+      - name: brew install changed formulae
+        run: |
+          set -euo pipefail
+
+          # Find the formulae changed by this PR (excluding deletions).
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+          git diff --name-only --diff-filter=d FETCH_HEAD HEAD -- 'Formula/*.rb' \
+            > changed-formulae.txt
+
+          if [ ! -s changed-formulae.txt ]; then
+            echo "No formula changes to verify."
+            exit 0
+          fi
+
+          echo "Changed formulae:"
+          cat changed-formulae.txt
+
+          # Expose the checked-out repo as the mongodb/brew tap so brew installs
+          # the PR's formulae. (Fresh runner -> no pre-existing tap directory.)
+          tap_dir="$(brew --repository)/Library/Taps/mongodb/homebrew-brew"
+          mkdir -p "$(dirname "$tap_dir")"
+          ln -sfn "$GITHUB_WORKSPACE" "$tap_dir"
+
+          # Install each changed formula, then uninstall it before the next so
+          # conflicting formulae (e.g. community vs enterprise) don't collide.
+          # --ignore-dependencies keeps this to the formula's own download+check.
+          # bash 3.2 on macOS has no `mapfile`; read with a while loop.
+          status=0
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            name="$(basename "$file" .rb)"
+            echo "::group::brew install mongodb/brew/${name} (${{ matrix.arch }})"
+            if brew install --ignore-dependencies --formula "mongodb/brew/${name}"; then
+              brew uninstall --force --formula "mongodb/brew/${name}" >/dev/null 2>&1 || true
+            else
+              echo "::error file=${file}::brew install failed for ${name} on ${{ matrix.arch }}"
+              status=1
+            fi
+            echo "::endgroup::"
+          done < changed-formulae.txt
+
+          exit "$status"
+
+  # Single required status check: succeeds only if every matrix leg passed.
+  # Point branch protection / auto-merge at "verify-formulae".
+  verify-formulae:
+    needs: install
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gate on the install matrix
+        run: |
+          if [ "${{ needs.install.result }}" != "success" ]; then
+            echo "One or more install legs failed."
+            exit 1
+          fi
+          echo "All install legs passed."
