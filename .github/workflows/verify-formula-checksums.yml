@@ -1,10 +1,12 @@
 name: Verify formula checksums
 
-# Validates every `url` / `sha256` pair in any Formula/*.rb file changed by a
-# pull request: each archive is downloaded and its SHA-256 is recomputed and
-# compared against the value pinned in the formula. This gates automated
-# formula-bump PRs (e.g. from `mr homebrew release`) so a wrong or stale
-# checksum can never be merged.
+# Validates the checksums of any Formula/*.rb changed by a pull request using
+# Homebrew itself: `brew fetch` downloads each formula's artifact and verifies
+# it against the pinned `sha256`. Because the formulae are arch-conditional
+# (`if Hardware::CPU.intel? ... else ...`), each runner only sees its own arch's
+# url/sha -- so we run on both an Intel and an Apple-Silicon macOS runner to
+# cover x86_64 and arm64. This gates automated formula-bump PRs (e.g. from
+# `mr homebrew release`) so a wrong or stale checksum can never be merged.
 
 on:
   pull_request:
@@ -18,77 +20,61 @@ concurrency:
   group: verify-formula-checksums-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  # Read formulae from the tapped checkout below, not the Homebrew JSON API.
+  HOMEBREW_NO_INSTALL_FROM_API: "1"
+
 jobs:
   verify-checksums:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-13 # Intel (x86_64)
+            arch: x86_64
+          - runner: macos-14 # Apple Silicon (arm64)
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    name: verify-checksums (${{ matrix.arch }})
     steps:
       - name: Check out PR
         uses: actions/checkout@v4
 
-      - name: Verify checksums of changed formulae
+      - name: Verify changed formulae with brew fetch
         run: |
           set -euo pipefail
 
-          # Fetch the PR base and diff against it to find changed formulae.
+          # Find the formulae changed by this PR (excluding deletions).
           git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
-          mapfile -t FILES < <(
-            git diff --name-only --diff-filter=d FETCH_HEAD HEAD -- 'Formula/*.rb'
-          )
+          git diff --name-only --diff-filter=d FETCH_HEAD HEAD -- 'Formula/*.rb' \
+            > changed-formulae.txt
 
-          if [ "${#FILES[@]}" -eq 0 ]; then
+          if [ ! -s changed-formulae.txt ]; then
             echo "No formula changes to verify."
             exit 0
           fi
 
           echo "Changed formulae:"
-          printf '  %s\n' "${FILES[@]}"
+          cat changed-formulae.txt
 
-          python3 - "${FILES[@]}" <<'PY'
-          import hashlib
-          import re
-          import sys
-          import urllib.request
+          # Expose the checked-out repo to Homebrew as the mongodb/brew tap so
+          # brew reads the PR's formulae rather than the published tap.
+          tap_dir="$(brew --repository)/Library/Taps/mongodb/homebrew-brew"
+          mkdir -p "$(dirname "$tap_dir")"
+          ln -sf "$GITHUB_WORKSPACE" "$tap_dir"
 
-          # Matches a `url "..."` line immediately followed by its
-          # `sha256 "..."` line (the formula's pinned checksum).
-          PAIR = re.compile(r'url\s+"([^"]+)"\s*\n\s*sha256\s+"([0-9a-f]{64})"')
+          # bash 3.2 on macOS has no `mapfile`; read the list with a while loop.
+          status=0
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            name="$(basename "$file" .rb)"
+            echo "::group::brew fetch mongodb/brew/${name} (${{ matrix.arch }})"
+            if ! brew fetch --retry --formula "mongodb/brew/${name}"; then
+              echo "::error file=${file}::brew fetch failed for ${name} on ${{ matrix.arch }}"
+              status=1
+            fi
+            echo "::endgroup::"
+          done < changed-formulae.txt
 
-          paths = [p for p in sys.argv[1:] if p]
-          failures = []
-          checked = 0
-
-          for path in paths:
-              with open(path) as f:
-                  text = f.read()
-
-              for url, expected in PAIR.findall(text):
-                  checked += 1
-                  print(f"verifying {url}")
-                  digest = hashlib.sha256()
-                  try:
-                      with urllib.request.urlopen(url, timeout=300) as resp:
-                          for chunk in iter(lambda: resp.read(1 << 20), b""):
-                              digest.update(chunk)
-                  except Exception as exc:  # noqa: BLE001 - report and continue
-                      failures.append(f"{path}: {url}: download failed: {exc}")
-                      continue
-
-                  actual = digest.hexdigest()
-                  if actual != expected:
-                      failures.append(
-                          f"{path}: {url}: sha256 mismatch "
-                          f"(expected {expected}, got {actual})"
-                      )
-                  else:
-                      print(f"  OK {actual}")
-
-          print(f"\nchecked {checked} url/sha256 pair(s) across {len(paths)} file(s)")
-
-          if failures:
-              print("\nFAILURES:")
-              for failure in failures:
-                  print(f"  - {failure}")
-              sys.exit(1)
-
-          print("all checksums verified")
-          PY
+          exit "$status"
