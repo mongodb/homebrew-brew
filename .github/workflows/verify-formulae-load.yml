@@ -37,11 +37,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Load changed formulae with brew info
+        env:
+          # Pass via env (not direct ${{ }} interpolation) so a crafted branch
+          # name can't inject shell commands into the run script.
+          BASE_REF: ${{ github.base_ref }}
         run: |
           set -euo pipefail
 
           # Find the formulae changed by this PR (excluding deletions).
-          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
           git diff --name-only --diff-filter=d FETCH_HEAD HEAD -- 'Formula/*.rb' \
             > changed-formulae.txt
 
