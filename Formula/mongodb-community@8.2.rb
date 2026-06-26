@@ -6,7 +6,7 @@ class MongodbCommunityAT82 < Formula
 
   if Hardware::CPU.intel?
     url "https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-8.2.11.tgz"
-    sha256 "04b205ae64e853cb451dd8c00fed2af36edcc9e0c7a18897c2db1db3a7bb34c0"
+    sha256 "0000000000000000000000000000000000000000000000000000000000000000"
   else
     url "https://fastdl.mongodb.org/osx/mongodb-macos-arm64-8.2.11.tgz"
     sha256 "337ff1fdddab54a526219050f6156e4fa5bd6a3672fd4b79fbc68379717e1f06"
