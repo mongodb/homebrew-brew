@@ -31,7 +31,7 @@ env:
 
 jobs:
   verify-formulae-load:
-    runs-on: macos-14 # Apple Silicon (arm64)
+    runs-on: macos-15-intel # Apple Silicon (arm64)
     steps:
       - name: Check out PR
         uses: actions/checkout@v4
