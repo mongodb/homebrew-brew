@@ -31,9 +31,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: macos-13 # Intel (x86_64)
+          - runner: macos-15-intel # Intel (x86_64)
             arch: x86_64
-          - runner: macos-14 # Apple Silicon (arm64)
+          - runner: macos-15 # Apple Silicon (arm64)
             arch: arm64
     runs-on: ${{ matrix.runner }}
     name: verify-checksums (${{ matrix.arch }})
