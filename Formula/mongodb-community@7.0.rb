@@ -1,3 +1,4 @@
+# hello world
 class MongodbCommunityAT70 < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.com/"

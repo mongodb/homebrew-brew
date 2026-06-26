@@ -1,3 +1,4 @@
+# hello world
 class MongodbCommunityShell < Formula
   desc "An interactive JavaScript command-line interface to MongoDB"
   homepage "https://www.mongodb.com/"
