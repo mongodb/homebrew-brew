@@ -66,6 +66,11 @@ jobs:
           mkdir -p "$(dirname "$tap_dir")"
           ln -sfn "$GITHUB_WORKSPACE" "$tap_dir"
 
+          # Recent Homebrew refuses to load formulae from an untrusted
+          # third-party tap (HOMEBREW_REQUIRE_TAP_TRUST is set on CI runners).
+          # Trust our tap so brew can load the PR's formulae and their deps.
+          brew trust --tap mongodb/brew
+
           # Install each changed formula, then uninstall it before the next so
           # conflicting formulae (e.g. community vs enterprise) don't collide.
           # --ignore-dependencies keeps this to the formula's own download+check.
