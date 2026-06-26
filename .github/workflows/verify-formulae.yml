@@ -1,11 +1,12 @@
 name: Verify formulae
 
-# Validates any Formula/*.rb changed by a pull request by installing it with
-# Homebrew on both a macOS Intel and an Apple-Silicon runner. `brew install`
-# verifies the arch-appropriate `sha256` (it fails on a mismatch) and loads the
-# formula (catching e.g. a class name that doesn't match the file). Because the
-# formulae are arch-conditional, the two runners together cover the x86_64 and
-# arm64 pins. Gates automated formula-bump PRs (e.g. from `mr homebrew release`).
+# Validates any Formula/*.rb changed by a pull request with `brew fetch` on both
+# a macOS Intel and an Apple-Silicon runner. `brew fetch` downloads the
+# arch-appropriate archive and verifies its `sha256` (failing on a mismatch),
+# and loads the formula (catching e.g. a class name that doesn't match the
+# file). Because the formulae are arch-conditional, the two runners together
+# cover the x86_64 and arm64 pins. Gates automated formula-bump PRs (e.g. from
+# `mr homebrew release`).
 
 on:
   pull_request:
@@ -20,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  install:
+  fetch:
     strategy:
       fail-fast: false
       matrix:
@@ -30,7 +31,7 @@ jobs:
           - runner: macos-15 # Apple Silicon (arm64)
             arch: arm64
     runs-on: ${{ matrix.runner }}
-    name: install (${{ matrix.arch }})
+    name: fetch (${{ matrix.arch }})
     env:
       HOMEBREW_NO_AUTO_UPDATE: "1"
       HOMEBREW_NO_ENV_HINTS: "1"
@@ -43,7 +44,7 @@ jobs:
       - name: Check out PR
         uses: actions/checkout@v4
 
-      - name: brew install changed formulae
+      - name: brew fetch changed formulae
         run: |
           set -euo pipefail
 
@@ -60,7 +61,7 @@ jobs:
           echo "Changed formulae:"
           cat changed-formulae.txt
 
-          # Expose the checked-out repo as the mongodb/brew tap so brew installs
+          # Expose the checked-out repo as the mongodb/brew tap so brew fetches
           # the PR's formulae. (Fresh runner -> no pre-existing tap directory.)
           tap_dir="$(brew --repository)/Library/Taps/mongodb/homebrew-brew"
           mkdir -p "$(dirname "$tap_dir")"
@@ -71,19 +72,17 @@ jobs:
           # Trust our tap so brew can load the PR's formulae and their deps.
           brew trust --tap mongodb/brew
 
-          # Install each changed formula, then uninstall it before the next so
-          # conflicting formulae (e.g. community vs enterprise) don't collide.
-          # --ignore-dependencies keeps this to the formula's own download+check.
+          # brew fetch downloads each formula's archive and verifies its sha256
+          # (failing on mismatch) and loads the formula -- no install side
+          # effects, dependencies, or conflicts.
           # bash 3.2 on macOS has no `mapfile`; read with a while loop.
           status=0
           while IFS= read -r file; do
             [ -n "$file" ] || continue
             name="$(basename "$file" .rb)"
-            echo "::group::brew install mongodb/brew/${name} (${{ matrix.arch }})"
-            if brew install --ignore-dependencies --formula "mongodb/brew/${name}"; then
-              brew uninstall --force --formula "mongodb/brew/${name}" >/dev/null 2>&1 || true
-            else
-              echo "::error file=${file}::brew install failed for ${name} on ${{ matrix.arch }}"
+            echo "::group::brew fetch mongodb/brew/${name} (${{ matrix.arch }})"
+            if ! brew fetch --retry --formula "mongodb/brew/${name}"; then
+              echo "::error file=${file}::brew fetch failed for ${name} on ${{ matrix.arch }}"
               status=1
             fi
             echo "::endgroup::"
@@ -94,14 +93,14 @@ jobs:
   # Single required status check: succeeds only if every matrix leg passed.
   # Point branch protection / auto-merge at "verify-formulae".
   verify-formulae:
-    needs: install
+    needs: fetch
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Gate on the install matrix
+      - name: Gate on the fetch matrix
         run: |
-          if [ "${{ needs.install.result }}" != "success" ]; then
-            echo "One or more install legs failed."
+          if [ "${{ needs.fetch.result }}" != "success" ]; then
+            echo "One or more fetch legs failed."
             exit 1
           fi
-          echo "All install legs passed."
+          echo "All fetch legs passed."
