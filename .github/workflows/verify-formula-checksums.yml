@@ -1,0 +1,91 @@
+name: Verify formula checksums
+
+# Validates the checksums of any Formula/*.rb changed by a pull request: each
+# `url` is downloaded and its SHA-256 recomputed and compared to the pinned
+# `sha256`. This gates automated formula-bump PRs (e.g. from `mr homebrew
+# release`) so a wrong or stale checksum can never be merged.
+#
+# This is a plain download + hash check (not `brew fetch`, which does not verify
+# checksums). It runs on Linux and validates every `url`/`sha256` pair in the
+# changed files, so both the x86_64 and arm64 pins are covered from one runner.
+
+on:
+  pull_request:
+    paths:
+      - "Formula/**.rb"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-formula-checksums-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify-checksums:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR
+        uses: actions/checkout@v4
+
+      - name: Verify checksums of changed formulae
+        env:
+          # Pass via env (not direct ${{ }} interpolation) so a crafted branch
+          # name can't inject shell commands into the run script.
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+
+          # Find the formulae changed by this PR (excluding deletions).
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+          git diff --name-only --diff-filter=d FETCH_HEAD HEAD -- 'Formula/*.rb' \
+            > changed-formulae.txt
+
+          if [ ! -s changed-formulae.txt ]; then
+            echo "No formula changes to verify."
+            exit 0
+          fi
+
+          echo "Changed formulae:"
+          cat changed-formulae.txt
+
+          python3 - $(cat changed-formulae.txt) <<'PY'
+          import hashlib
+          import re
+          import sys
+          import urllib.request
+
+          # Matches a `url "..."` line immediately followed by its `sha256 "..."`.
+          PAIR = re.compile(r'url "([^"]+)"\n\s*sha256 "([0-9a-f]{64})"')
+
+          failures = []
+          checked = 0
+          for path in sys.argv[1:]:
+              with open(path) as f:
+                  text = f.read()
+              for url, expected in PAIR.findall(text):
+                  checked += 1
+                  print(f"verifying {url}")
+                  digest = hashlib.sha256()
+                  try:
+                      with urllib.request.urlopen(url, timeout=300) as resp:
+                          for chunk in iter(lambda: resp.read(1 << 20), b""):
+                              digest.update(chunk)
+                  except Exception as exc:  # noqa: BLE001 - report and continue
+                      failures.append(f"{path}: {url}: download failed: {exc}")
+                      continue
+                  actual = digest.hexdigest()
+                  if actual != expected:
+                      failures.append(
+                          f"{path}: {url}: sha256 mismatch "
+                          f"(expected {expected}, got {actual})"
+                      )
+
+          print(f"checked {checked} url/sha256 pair(s) across {len(sys.argv) - 1} file(s)")
+          if failures:
+              print("FAILURES:")
+              for failure in failures:
+                  print(f"  - {failure}")
+              sys.exit(1)
+          print("all checksums verified")
+          PY
