@@ -1,12 +1,13 @@
 name: Verify formula checksums
 
-# Validates the checksums of any Formula/*.rb changed by a pull request using
-# Homebrew itself: `brew fetch` downloads each formula's artifact and verifies
-# it against the pinned `sha256`. Because the formulae are arch-conditional
-# (`if Hardware::CPU.intel? ... else ...`), each runner only sees its own arch's
-# url/sha -- so we run on both an Intel and an Apple-Silicon macOS runner to
-# cover x86_64 and arm64. This gates automated formula-bump PRs (e.g. from
-# `mr homebrew release`) so a wrong or stale checksum can never be merged.
+# Validates the checksums of any Formula/*.rb changed by a pull request: each
+# `url` is downloaded and its SHA-256 recomputed and compared to the pinned
+# `sha256`. This gates automated formula-bump PRs (e.g. from `mr homebrew
+# release`) so a wrong or stale checksum can never be merged.
+#
+# This is a plain download + hash check (not `brew fetch`, which does not verify
+# checksums). It runs on Linux and validates every `url`/`sha256` pair in the
+# changed files, so both the x86_64 and arm64 pins are covered from one runner.
 
 on:
   pull_request:
@@ -20,28 +21,14 @@ concurrency:
   group: verify-formula-checksums-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
-env:
-  HOMEBREW_NO_AUTO_UPDATE: "1"
-  # Read formulae from the tapped checkout below, not the Homebrew JSON API.
-  HOMEBREW_NO_INSTALL_FROM_API: "1"
-
 jobs:
   verify-checksums:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runner: macos-13 # Intel (x86_64)
-            arch: x86_64
-          - runner: macos-14 # Apple Silicon (arm64)
-            arch: arm64
-    runs-on: ${{ matrix.runner }}
-    name: verify-checksums (${{ matrix.arch }})
+    runs-on: ubuntu-latest
     steps:
       - name: Check out PR
         uses: actions/checkout@v4
 
-      - name: Verify changed formulae with brew fetch
+      - name: Verify checksums of changed formulae
         run: |
           set -euo pipefail
 
@@ -58,23 +45,43 @@ jobs:
           echo "Changed formulae:"
           cat changed-formulae.txt
 
-          # Expose the checked-out repo to Homebrew as the mongodb/brew tap so
-          # brew reads the PR's formulae rather than the published tap.
-          tap_dir="$(brew --repository)/Library/Taps/mongodb/homebrew-brew"
-          mkdir -p "$(dirname "$tap_dir")"
-          ln -sf "$GITHUB_WORKSPACE" "$tap_dir"
+          python3 - $(cat changed-formulae.txt) <<'PY'
+          import hashlib
+          import re
+          import sys
+          import urllib.request
 
-          # bash 3.2 on macOS has no `mapfile`; read the list with a while loop.
-          status=0
-          while IFS= read -r file; do
-            [ -n "$file" ] || continue
-            name="$(basename "$file" .rb)"
-            echo "::group::brew fetch mongodb/brew/${name} (${{ matrix.arch }})"
-            if ! brew fetch --retry --formula "mongodb/brew/${name}"; then
-              echo "::error file=${file}::brew fetch failed for ${name} on ${{ matrix.arch }}"
-              status=1
-            fi
-            echo "::endgroup::"
-          done < changed-formulae.txt
+          # Matches a `url "..."` line immediately followed by its `sha256 "..."`.
+          PAIR = re.compile(r'url "([^"]+)"\n\s*sha256 "([0-9a-f]{64})"')
 
-          exit "$status"
+          failures = []
+          checked = 0
+          for path in sys.argv[1:]:
+              with open(path) as f:
+                  text = f.read()
+              for url, expected in PAIR.findall(text):
+                  checked += 1
+                  print(f"verifying {url}")
+                  digest = hashlib.sha256()
+                  try:
+                      with urllib.request.urlopen(url, timeout=300) as resp:
+                          for chunk in iter(lambda: resp.read(1 << 20), b""):
+                              digest.update(chunk)
+                  except Exception as exc:  # noqa: BLE001 - report and continue
+                      failures.append(f"{path}: {url}: download failed: {exc}")
+                      continue
+                  actual = digest.hexdigest()
+                  if actual != expected:
+                      failures.append(
+                          f"{path}: {url}: sha256 mismatch "
+                          f"(expected {expected}, got {actual})"
+                      )
+
+          print(f"checked {checked} url/sha256 pair(s) across {len(sys.argv) - 1} file(s)")
+          if failures:
+              print("FAILURES:")
+              for failure in failures:
+                  print(f"  - {failure}")
+              sys.exit(1)
+          print("all checksums verified")
+          PY
