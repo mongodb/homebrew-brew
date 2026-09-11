@@ -1,0 +1,48 @@
+name: Validate formula structure (no downloads)
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'Formula/**'
+      - 'Aliases/**'
+      - 'scripts/validate_formulae.py'
+      - '.github/workflows/validate-formulae.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-formulae-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch origin master:master
+
+      - name: Ruby syntax check
+        run: |
+          set -euo pipefail
+          status=0
+          for file in Formula/*.rb; do
+            if ! ruby -c "$file" >/dev/null 2>&1; then
+              echo "::error file=${file}::Ruby syntax error in ${file}"
+              ruby -c "$file"
+              status=1
+            fi
+          done
+          exit "$status"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate formula consistency
+        run: python scripts/validate_formulae.py
