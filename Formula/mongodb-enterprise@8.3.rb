@@ -1,15 +1,15 @@
-class MongodbEnterprise < Formula
+class MongodbEnterpriseAT83 < Formula
   desc "High-performance, schema-free, document-oriented database (Enterprise)"
   homepage "https://www.mongodb.com/"
 
   # frozen_string_literal: true
   #
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-9.0.2.tgz"
-    sha256 "434b4a63dc43274a7798b3c5f4320fde76603a252f5fa806701f4c729e3dad29"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-8.3.11.tgz"
+    sha256 "02a031ed62d0b50ce003de2852a5dc77983dfba1ace9dcd6890236cbe9a296d3"
   else
-    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-9.0.2.tgz"
-    sha256 "95538a8609aa3049fd732dd3e2f881c2039f2c2b86a9400426187707c18dbcb0"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-8.3.11.tgz"
+    sha256 "712db6f1129830a71843339f79909c6c34e56eb20c3e441c6a707a31621a472a"
   end
 
   license "MongoDB Customer Agreement"
