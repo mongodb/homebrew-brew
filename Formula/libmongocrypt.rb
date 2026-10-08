@@ -1,8 +1,8 @@
 class Libmongocrypt < Formula
   desc "C library for Client Side Encryption"
   homepage "https://github.com/mongodb/libmongocrypt"
-  url "https://github.com/mongodb/libmongocrypt/archive/1.20.4.tar.gz"
-  sha256 "e478cc0673d53327818b7fbc7a43e6c1a3aa1b3fd750c96050b3b8768ecc944e"
+  url "https://github.com/mongodb/libmongocrypt/archive/1.20.5.tar.gz"
+  sha256 "aa1c747f7073b66d247e881903358fed109eef705f8d091d0713c971fc956d66"
   license "Apache-2.0"
   head "https://github.com/mongodb/libmongocrypt.git"
 
@@ -13,7 +13,7 @@ class Libmongocrypt < Formula
     cmake_args << if build.head?
       "-DBUILD_VERSION=1.21.0-pre"
     else
-      "-DBUILD_VERSION=1.20.4"
+      "-DBUILD_VERSION=1.20.5"
     end
 
     cmake_args << "-DENABLE_ONLINE_TESTS=OFF"
