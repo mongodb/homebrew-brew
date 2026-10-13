@@ -5,11 +5,11 @@ class MongodbEnterpriseAT80 < Formula
   # frozen_string_literal: true
   #
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-8.0.32.tgz"
-    sha256 "1df796444472baecc3d84bcb824785da56efc7c4cdea659543b870ad2af0439d"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-x86_64-enterprise-8.0.34.tgz"
+    sha256 "671b17eec22088e594ebc93169a7d5ad817fcbd95c0a1101d70b1a51427f7361"
   else
-    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-8.0.32.tgz"
-    sha256 "6674b9694a72dbe53703e880f31e8c6696ef89cb5e1f153d4e7259428d18435c"
+    url "https://downloads.mongodb.com/osx/mongodb-macos-arm64-enterprise-8.0.34.tgz"
+    sha256 "615340a1cb12b343c089701cea6995310c42f916035268564f5f1c0dd6476af6"
   end
 
   license "MongoDB Customer Agreement"
