@@ -3,8 +3,8 @@ class MongodbMongocryptdAT70 < Formula
   homepage "https://www.mongodb.com/"
 
   if Hardware::CPU.intel?
-    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-7.0.45.tgz"
-    sha256 "6eb71e9a57051eb03bfb8e691694b5ca1192a0eb7713f0b27cc0b608aa290c3a"
+    url "https://downloads.mongodb.com/osx/mongodb-cryptd-macos-x86_64-enterprise-7.0.48.tgz"
+    sha256 "f425665f8acf52f09bc09adc81018a42faca8504040d710867d014483ffb5430"
   else
     url "https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-7.0.37.tgz"
     sha256 "77a3a7a44a5e491d410641cfc8918adc78756cbe601b64fd73d280e4365b2e77"
