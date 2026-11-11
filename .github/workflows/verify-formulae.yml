@@ -1,4 +1,4 @@
-name: Verify formulae
+name: Verify formula downloads (brew fetch + sha256)
 
 # Validates any Formula/*.rb changed by a pull request with `brew fetch` on both
 # a macOS Intel and an Apple-Silicon runner. `brew fetch` downloads the
